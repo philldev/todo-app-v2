@@ -23,6 +23,7 @@ export default function useFilter() {
     return [];
   };
   return {
+    filter,
     filteredList,
     selectFilter,
     filters,
