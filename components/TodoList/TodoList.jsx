@@ -1,11 +1,17 @@
+import {
+  Box,
+  Button,
+  Checkbox,
+  Flex,
+  Grid,
+  IconButton,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { useContext } from "react";
 import { TodoContext } from "../../context/TodoContext";
-import { DeleteIcon } from "../Icons";
-
 import useFilter from "../../hooks/useFilter";
-
-import styles from "../../styles/todo-list.module.css";
-import { ButtonDanger } from "../Buttons";
+import { DeleteIcon } from "../Icons";
 
 function TodoList() {
   const { list, checkTodo, deleteTodo, deleteAllCompleted } = useContext(
@@ -16,48 +22,64 @@ function TodoList() {
   const completeCount = list.filter((i) => i.isDone).length;
 
   return (
-    <div className={styles.container}>
-      <ul className={styles["filter-list"]}>
-        {filters.map((item) => (
-          <li key={item.code} onClick={() => selectFilter(item.code)}>
-            <span
-              className={`${styles["filter-item"]} ${
-                item.code === filter ? styles.active : ""
-              }`}
+    <Box overflowY="auto" maxH="100%" pos="relative">
+      <VStack pos="absolute" inset="0" align="stretch" spacing="4" maxH="min">
+        <Flex
+          alignItems="center"
+          flexWrap="wrap"
+          gridGap="2"
+          justifyContent="flex-start"
+          height="8"
+        >
+          {filters.map((item) => (
+            <Box
+              as="li"
+              maxW="max-content"
+              key={item.code}
+              onClick={() => selectFilter(item.code)}
             >
-              {item.label}
-              {filter === "HIDE_ISDONE" && item.code === "HIDE_ISDONE"
-                ? ` | ${completeCount} hidden`
-                : null}
-            </span>
-          </li>
-        ))}
+              <Text
+                fontWeight="bold"
+                borderBottom={`${item.code === filter ? "2px solid" : ""}`}
+                borderColor="blue.400"
+                display="inline"
+                whiteSpace="nowrap"
+              >
+                {item.label}
+              </Text>
+            </Box>
+          ))}
 
-        {completeCount ? (
-          <li>
-            <ButtonDanger onClick={() => deleteAllCompleted()}>
-              Delete All Completed
-            </ButtonDanger>
-          </li>
-        ) : null}
-      </ul>
-      <div></div>
-      <ul>
-        {filteredList(list).length ? (
-          filteredList(list).map((item) => (
-            <li key={item.id}>
-              <TodoItem
-                item={item}
-                checkTodo={checkTodo}
-                deleteTodo={deleteTodo}
-              />
-            </li>
-          ))
-        ) : (
-          <div>It's empty</div>
-        )}
-      </ul>
-    </div>
+          {completeCount ? (
+            <Box as="li" maxW="max-content">
+              <Button
+                variant="outline"
+                colorScheme="red"
+                size="xs"
+                onClick={() => deleteAllCompleted()}
+              >
+                Delete Completed
+              </Button>
+            </Box>
+          ) : null}
+        </Flex>
+        <VStack align="stretch" spacing="4">
+          {filteredList(list).length ? (
+            filteredList(list).map((item) => (
+              <Box as="li" key={item.id}>
+                <TodoItem
+                  item={item}
+                  checkTodo={checkTodo}
+                  deleteTodo={deleteTodo}
+                />
+              </Box>
+            ))
+          ) : (
+            <Text>It's empty</Text>
+          )}
+        </VStack>
+      </VStack>
+    </Box>
   );
 }
 
@@ -69,21 +91,30 @@ function TodoItem({ item, checkTodo, deleteTodo }) {
     deleteTodo(item);
   };
   return (
-    <div
-      className={`${styles["todo-item"]}  ${
-        item.isDone ? styles["is-done"] : ""
-      } `}
+    <Grid
+      gap="2"
+      alignItems="center"
+      gridTemplateColumns="max-content auto max-content"
     >
-      <input
+      <Checkbox
         type="checkbox"
         defaultChecked={item.isDone}
         onChange={handleCheck}
       />
-      <span>{item.text}</span>
-      <button onClick={handleDelete} className={styles["delete-btn"]}>
-        <DeleteIcon />
-      </button>
-    </div>
+      <Text
+        textDecor={`${item.isDone ? "line-through" : "normal"}`}
+        opacity={`${item.isDone ? "0.5" : "1"}`}
+      >
+        {item.text}
+      </Text>
+      <IconButton
+        bgColor="transparent"
+        aria-label="Search database"
+        size="xs"
+        icon={<DeleteIcon boxSize color="red.400" opacity="0.75" />}
+        onClick={handleDelete}
+      />
+    </Grid>
   );
 }
 

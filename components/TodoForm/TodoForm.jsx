@@ -1,38 +1,38 @@
+import { Flex, IconButton, Input } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import { TodoContext } from "../../context/TodoContext";
 import { AddIcon } from "../Icons";
-
-import styles from "../../styles/todo-form.module.css";
 
 function TodoForm() {
   const [text, setText] = useState("");
   const { addTodo } = useContext(TodoContext);
   return (
-    <div className={styles.container}>
-      <input
-        className={styles.input}
-        type="text"
-        value={text}
-        onChange={(e) => {
-          setText(e.target.value);
-        }}
-        onKeyPress={(e) => {
-          if (e.key === "Enter") {
+    <Flex gridGap={4}>
+      <Input
+        onKeyPress={(evt) => {
+          if (evt.key === "Enter") {
             addTodo(text);
             setText("");
           }
         }}
+        value={text}
+        variant="outline"
+        backgroundColor="blackAlpha.600"
+        border="none"
+        onChange={(evt) => setText(evt.target.value)}
       />
-      <button
-        className={styles["add-btn"]}
+
+      <IconButton
         onClick={() => {
           addTodo(text);
           setText("");
         }}
-      >
-        <AddIcon />
-      </button>
-    </div>
+        aria-label="Add todo"
+        icon={<AddIcon />}
+        size="md"
+        backgroundColor="blue.400"
+      />
+    </Flex>
   );
 }
 
