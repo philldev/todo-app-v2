@@ -1,11 +1,13 @@
 .container {
   display: grid;
-  gap: 1rem;
+  gap: 0.1rem;
 }
 
 .filter-list {
   display: flex;
   gap: 1rem;
+  align-items: center;
+  height: 2.5rem;
 }
 
 .filter-item {

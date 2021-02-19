@@ -19,27 +19,29 @@ function TodoList() {
     <div className={styles.container}>
       <ul className={styles["filter-list"]}>
         {filters.map((item) => (
-          <li
-            key={item.code}
-            onClick={() => selectFilter(item.code)}
-            className={`${styles["filter-item"]} ${
-              item.code === filter ? styles.active : ""
-            }`}
-          >
-            {item.label}
-            {filter === "HIDE_ISDONE" && item.code === "HIDE_ISDONE"
-              ? ` | ${completeCount} hidden`
-              : null}
+          <li key={item.code} onClick={() => selectFilter(item.code)}>
+            <span
+              className={`${styles["filter-item"]} ${
+                item.code === filter ? styles.active : ""
+              }`}
+            >
+              {item.label}
+              {filter === "HIDE_ISDONE" && item.code === "HIDE_ISDONE"
+                ? ` | ${completeCount} hidden`
+                : null}
+            </span>
           </li>
         ))}
-      </ul>
-      <div>
+
         {completeCount ? (
-          <ButtonDanger onClick={() => deleteAllCompleted()}>
-            Delete All Completed
-          </ButtonDanger>
+          <li>
+            <ButtonDanger onClick={() => deleteAllCompleted()}>
+              Delete All Completed
+            </ButtonDanger>
+          </li>
         ) : null}
-      </div>
+      </ul>
+      <div></div>
       <ul>
         {filteredList(list).length ? (
           filteredList(list).map((item) => (

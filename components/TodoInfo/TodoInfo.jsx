@@ -7,6 +7,9 @@ function TodoInfo() {
   const { list } = useContext(TodoContext);
   const completeCount = list.filter((i) => i.isDone).length;
   const remainingCount = list.filter((i) => !i.isDone).length;
+  if (!list.length) {
+    return null;
+  }
   return (
     <div className={styles.container}>
       <h3>Progress</h3>
