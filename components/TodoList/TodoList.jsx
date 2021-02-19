@@ -5,10 +5,15 @@ import { DeleteIcon } from "../Icons";
 import useFilter from "../../hooks/useFilter";
 
 import styles from "../../styles/todo-list.module.css";
+import { ButtonDanger } from "../Buttons";
 
 function TodoList() {
-  const { list, checkTodo, deleteTodo } = useContext(TodoContext);
+  const { list, checkTodo, deleteTodo, deleteAllCompleted } = useContext(
+    TodoContext
+  );
   const { filteredList, selectFilter, filters, filter } = useFilter();
+
+  const completeCount = list.filter((i) => i.isDone).length;
 
   return (
     <div className={styles.container}>
@@ -22,9 +27,19 @@ function TodoList() {
             }`}
           >
             {item.label}
+            {filter === "HIDE_ISDONE" && item.code === "HIDE_ISDONE"
+              ? ` | ${completeCount} hidden`
+              : null}
           </li>
         ))}
       </ul>
+      <div>
+        {completeCount ? (
+          <ButtonDanger onClick={() => deleteAllCompleted()}>
+            Delete All Completed
+          </ButtonDanger>
+        ) : null}
+      </div>
       <ul>
         {filteredList(list).length ? (
           filteredList(list).map((item) => (
