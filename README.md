@@ -1,5 +1,6 @@
 Todo :
 
-- Add progress bar
-- Add Local Storage
-- Add user logic
+- (x) Add progress bar
+- (x) Add Chakra UI
+- () Add Local Storage
+- () Add user logic

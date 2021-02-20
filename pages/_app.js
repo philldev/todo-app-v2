@@ -4,11 +4,18 @@ import "../styles/reset.css";
 
 import { extendTheme } from "@chakra-ui/react";
 
-const theme = extendTheme({
+export const theme = extendTheme({
   fonts: {
     heading: "Josefin Sans",
     body: "Josefin Sans",
   },
+  colors: {
+    brand: {
+      600: "rgba(95, 39, 205,1.0)",
+    },
+  },
+  initialColorMode: "light",
+  useSystemColorMode: false,
 });
 
 function MyApp({ Component, pageProps }) {

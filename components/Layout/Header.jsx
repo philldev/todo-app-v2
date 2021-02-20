@@ -1,10 +1,15 @@
-import shortid from "shortid";
-import styles from "../../styles/header.module.css";
+import { Button, Flex, IconButton, Text, useColorMode } from "@chakra-ui/react";
+import { LightIcon, DarkIcon } from "../Icons";
 function Header() {
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <div>
-      <h1>Good Morning! user</h1>
-    </div>
+    <Flex align="center" justifyContent="space-between">
+      <Text>Good Morning! user</Text>
+      <IconButton
+        onClick={toggleColorMode}
+        icon={colorMode === "light" ? <LightIcon /> : <DarkIcon />}
+      />
+    </Flex>
   );
 }
 

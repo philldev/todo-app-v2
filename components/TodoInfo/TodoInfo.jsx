@@ -1,3 +1,4 @@
+import { Box, Grid, Text } from "@chakra-ui/react";
 import { useContext } from "react";
 import { TodoContext } from "../../context/TodoContext";
 import styles from "../../styles/todo-info.module.css";
@@ -6,14 +7,15 @@ import { CompleteIcon } from "../Icons";
 function TodoInfo() {
   const { list } = useContext(TodoContext);
   const completeCount = list.filter((i) => i.isDone).length;
-  const remainingCount = list.filter((i) => !i.isDone).length;
   if (!list.length) {
     return null;
   }
   return (
-    <div className={styles.container}>
-      <h3>Progress</h3>
-      <span className={styles.progress}>
+    <Grid gridGap="2" padding="3" borderRadius="2" bgColor="blackAlpha.200">
+      <Text fontSize="md" fontWeight="bold">
+        Progress
+      </Text>
+      <Text className={styles.progress}>
         Completed todos : {completeCount}/{list.length}{" "}
         {completeCount === list.length && (
           <CompleteIcon
@@ -22,14 +24,16 @@ function TodoInfo() {
             width={16}
           />
         )}
-      </span>
-      <div className={styles["progress-bar"]}>
-        <div
-          className={styles.fill}
-          style={{ width: `${(completeCount / list.length) * 100}%` }}
-        ></div>
-      </div>
-    </div>
+      </Text>
+      <Box pos="relative" h="4" bgColor="gray.500">
+        <Box
+          w={`${(completeCount / list.length) * 100}%`}
+          pos="absolute"
+          inset="0"
+          backgroundColor="green.300"
+        ></Box>
+      </Box>
+    </Grid>
   );
 }
 

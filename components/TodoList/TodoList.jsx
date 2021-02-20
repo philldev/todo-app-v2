@@ -23,7 +23,14 @@ function TodoList() {
 
   return (
     <Box overflowY="auto" maxH="100%" pos="relative">
-      <VStack pos="absolute" inset="0" align="stretch" spacing="4" maxH="min">
+      <VStack
+        p="2"
+        pos="absolute"
+        inset="0"
+        align="stretch"
+        spacing="4"
+        maxH="min"
+      >
         <Flex
           alignItems="center"
           flexWrap="wrap"
@@ -41,7 +48,7 @@ function TodoList() {
               <Text
                 fontWeight="bold"
                 borderBottom={`${item.code === filter ? "2px solid" : ""}`}
-                borderColor="blue.400"
+                borderColor="brand.600"
                 display="inline"
                 whiteSpace="nowrap"
               >
@@ -111,7 +118,7 @@ function TodoItem({ item, checkTodo, deleteTodo }) {
         bgColor="transparent"
         aria-label="Search database"
         size="xs"
-        icon={<DeleteIcon boxSize color="red.400" opacity="0.75" />}
+        icon={<DeleteIcon color="red.400" opacity="0.75" />}
         onClick={handleDelete}
       />
     </Grid>

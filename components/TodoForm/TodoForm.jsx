@@ -16,9 +16,6 @@ function TodoForm() {
           }
         }}
         value={text}
-        variant="outline"
-        backgroundColor="blackAlpha.600"
-        border="none"
         onChange={(evt) => setText(evt.target.value)}
       />
 
@@ -30,7 +27,7 @@ function TodoForm() {
         aria-label="Add todo"
         icon={<AddIcon />}
         size="md"
-        backgroundColor="blue.400"
+        backgroundColor="brand.600"
       />
     </Flex>
   );
