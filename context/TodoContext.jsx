@@ -1,5 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import shortid from "shortid";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 export const TodoContext = createContext();
 
@@ -22,7 +23,7 @@ const data = [
 ];
 
 export function TodoProvider({ children }) {
-  const [list, setList] = useState(data);
+  const [list, setList] = useLocalStorage("todo-list", []);
 
   const addTodo = (text) => {
     if (text) {

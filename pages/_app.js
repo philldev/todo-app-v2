@@ -14,7 +14,7 @@ export const theme = extendTheme({
       600: "rgba(95, 39, 205,1.0)",
     },
   },
-  initialColorMode: "light",
+  initialColorMode: "dark",
   useSystemColorMode: false,
 });
 

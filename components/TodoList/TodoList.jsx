@@ -32,6 +32,7 @@ function TodoList() {
         maxH="min"
       >
         <Flex
+          as="ul"
           alignItems="center"
           flexWrap="wrap"
           gridGap="2"
@@ -70,7 +71,7 @@ function TodoList() {
             </Box>
           ) : null}
         </Flex>
-        <VStack align="stretch" spacing="4">
+        <VStack as="ul" align="stretch" spacing="4">
           {filteredList(list).length ? (
             filteredList(list).map((item) => (
               <Box as="li" key={item.id}>
