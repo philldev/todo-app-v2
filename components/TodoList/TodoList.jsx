@@ -42,6 +42,7 @@ function TodoList() {
           {filters.map((item) => (
             <Box
               as="li"
+              listStyleType="none"
               maxW="max-content"
               key={item.code}
               onClick={() => selectFilter(item.code)}

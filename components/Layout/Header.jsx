@@ -1,14 +1,12 @@
-import { Button, Flex, IconButton, Text, useColorMode } from "@chakra-ui/react";
-import { LightIcon, DarkIcon } from "../Icons";
+import { Flex, Heading } from "@chakra-ui/react";
+import { useContext } from "react";
+import UserContext from "../../context/UserContext";
+
 function Header() {
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { user } = useContext(UserContext);
   return (
     <Flex align="center" justifyContent="space-between">
-      <Text>Good Morning! user</Text>
-      <IconButton
-        onClick={toggleColorMode}
-        icon={colorMode === "light" ? <LightIcon /> : <DarkIcon />}
-      />
+      <Heading>Good Morning! {user}</Heading>
     </Flex>
   );
 }

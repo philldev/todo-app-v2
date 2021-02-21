@@ -25,6 +25,7 @@ function TodoForm() {
           setText("");
         }}
         aria-label="Add todo"
+        textColor="whiteAlpha.900"
         icon={<AddIcon />}
         size="md"
         backgroundColor="brand.600"

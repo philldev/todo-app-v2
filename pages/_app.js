@@ -1,8 +1,8 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import "../styles/globals.css";
-import "../styles/reset.css";
+import { ChakraProvider, extendTheme, Grid } from "@chakra-ui/react";
+import AppHeader from "../components/AppHeader";
+import { UserProvider } from "../context/UserContext";
 
-import { extendTheme } from "@chakra-ui/react";
+import "../styles/global.css";
 
 export const theme = extendTheme({
   fonts: {
@@ -20,8 +20,19 @@ export const theme = extendTheme({
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
+    <ChakraProvider theme={theme} resetCSS>
+      <UserProvider>
+        <Grid
+          fontSize="xs"
+          gap="4"
+          boxShadow="xl"
+          gridTemplateRows="auto 1fr"
+          h="100vh"
+        >
+          <AppHeader />
+          <Component {...pageProps} />
+        </Grid>
+      </UserProvider>
     </ChakraProvider>
   );
 }

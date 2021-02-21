@@ -6,8 +6,8 @@ function AppLayout({ children }) {
         p="4"
         gridTemplateRows="auto auto minmax(min-content, 1fr) auto"
         gap="4"
-        h="100vh"
         alignItems="stretch"
+        h="100%"
         maxW="container.lg"
         m="0 auto"
       >

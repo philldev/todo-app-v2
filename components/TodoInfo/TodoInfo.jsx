@@ -1,7 +1,6 @@
 import { Box, Grid, Text } from "@chakra-ui/react";
 import { useContext } from "react";
 import { TodoContext } from "../../context/TodoContext";
-import styles from "../../styles/todo-info.module.css";
 import { CompleteIcon } from "../Icons";
 
 function TodoInfo() {
@@ -11,18 +10,16 @@ function TodoInfo() {
     return null;
   }
   return (
-    <Grid gridGap="2" padding="3" borderRadius="2" bgColor="blackAlpha.200">
+    <Grid gridGap="2" padding="3" borderRadius="sm" shadow="base">
       <Text fontSize="md" fontWeight="bold">
         Progress
       </Text>
-      <Text className={styles.progress}>
+      <Text>
         Completed todos : {completeCount}/{list.length}{" "}
         {completeCount === list.length && (
-          <CompleteIcon
-            style={{ color: "var(--color-green)" }}
-            width={18}
-            width={16}
-          />
+          <Box display="inline-flex" alignItems="center" as="span">
+            <CompleteIcon textColor="green.400" />
+          </Box>
         )}
       </Text>
       <Box pos="relative" h="4" bgColor="gray.500">
