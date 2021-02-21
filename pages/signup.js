@@ -29,7 +29,7 @@ export default function Signup() {
       <Head>
         <title>Signup</title>
       </Head>
-      <Box p="2">
+      <Box p="2" maxW="container.lg" m="0 auto">
         <Heading textAlign="center">Signup</Heading>
         <VStack
           onSubmit={handleSubmit}
