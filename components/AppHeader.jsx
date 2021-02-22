@@ -15,6 +15,7 @@ const AppHeader = () => {
       justifyContent="space-between"
       alignItems="center"
       p="4"
+      gridArea="header"
     >
       <Text fontSize="lg" fontWeight="bold" textColor="whiteAlpha.900">
         Todo App {randoEmoji}

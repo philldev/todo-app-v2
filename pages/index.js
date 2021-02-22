@@ -3,7 +3,7 @@ import TodoList from "../components/TodoList/TodoList";
 import TodoInfo from "../components/TodoInfo/TodoInfo";
 
 import { TodoProvider } from "../context/TodoContext";
-import AppLayout from "../components/Layout/AppLayout";
+import HomeLayout from "../components/Layout/HomeLayout";
 import Header from "../components/Layout/Header";
 import Head from "next/head";
 import { useContext, useEffect, useRef } from "react";
@@ -28,12 +28,12 @@ function Home() {
           <title>Todo App</title>
         </Head>
         {user && (
-          <AppLayout>
+          <HomeLayout>
             <Header />
             <TodoForm />
             <TodoList />
             <TodoInfo />
-          </AppLayout>
+          </HomeLayout>
         )}
       </TodoProvider>
     </>

@@ -24,9 +24,11 @@ function MyApp({ Component, pageProps }) {
       <UserProvider>
         <Grid
           fontSize="xs"
-          gap="4"
-          boxShadow="xl"
-          gridTemplateRows="auto 1fr"
+          gridTemplate={`
+          "header header header" auto
+          ". main ." 1fr /
+          auto minmax(auto, 1024px) auto
+          `}
           h="100vh"
         >
           <AppHeader />
