@@ -6,19 +6,6 @@ import NextLink from "next/link";
 function Header() {
   const { user } = useContext(UserContext);
 
-  const sayDay = () => {
-    const today = new Date();
-    const curHr = today.getHours();
-
-    if (curHr < 12) {
-      return "Good morning";
-    } else if (curHr < 18) {
-      return "Good afternoon";
-    } else {
-      return "Good evening";
-    }
-  };
-
   return (
     <Flex align="center" justifyContent="space-between">
       <Heading>
@@ -30,5 +17,18 @@ function Header() {
     </Flex>
   );
 }
+
+const sayDay = () => {
+  const today = new Date();
+  const curHr = today.getHours();
+
+  if (curHr < 12) {
+    return "Good morning";
+  } else if (curHr < 18) {
+    return "Good afternoon";
+  } else {
+    return "Good evening";
+  }
+};
 
 export default Header;

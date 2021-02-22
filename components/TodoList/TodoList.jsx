@@ -45,6 +45,7 @@ function TodoList() {
               listStyleType="none"
               maxW="max-content"
               key={item.code}
+              cursor="pointer"
               onClick={() => selectFilter(item.code)}
             >
               <Text

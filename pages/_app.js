@@ -27,9 +27,10 @@ function MyApp({ Component, pageProps }) {
           gridTemplate={`
           "header header header" auto
           ". main ." 1fr /
-          auto minmax(auto, 1024px) auto
+          1fr minmax(auto, 1024px) 1fr
           `}
           gap="4"
+          rowGap="8"
           h="100vh"
         >
           <AppHeader />

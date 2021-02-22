@@ -5,5 +5,5 @@ Todo :
 - (x) Add Local Storage
 - (x) Add user logic
 - () Add sidebar
-- () Add Logout implementations
+- (x) Add Logout implementations
 - ()
