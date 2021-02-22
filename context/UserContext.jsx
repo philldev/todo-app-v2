@@ -1,3 +1,4 @@
+import { Router } from "next/router";
 import { createContext, useEffect, useState } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 
@@ -26,7 +27,12 @@ export const UserProvider = ({ children }) => {
   const signup = (username) => {
     setUserLSValue(username);
   };
-
+  const logout = () => {
+    setUserLSValue(null);
+  };
+  const edit = (newUsername) => {
+    setUserLSValue(newUsername);
+  };
   useEffect(() => {
     setUser(() => {
       try {
@@ -43,7 +49,7 @@ export const UserProvider = ({ children }) => {
   }, [user]);
 
   return (
-    <UserContext.Provider value={{ user, signup }}>
+    <UserContext.Provider value={{ user, signup, logout, edit }}>
       {children}
     </UserContext.Provider>
   );

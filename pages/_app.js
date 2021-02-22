@@ -29,6 +29,7 @@ function MyApp({ Component, pageProps }) {
           ". main ." 1fr /
           auto minmax(auto, 1024px) auto
           `}
+          gap="4"
           h="100vh"
         >
           <AppHeader />

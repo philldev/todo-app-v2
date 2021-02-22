@@ -10,10 +10,11 @@ import {
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
+import SignupLayout from "../components/Layout/SignupLayout";
 import UserContext from "../context/UserContext";
 
 export default function Signup() {
-  const { signup, user } = useContext(UserContext);
+  const { signup } = useContext(UserContext);
   const router = useRouter();
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -29,7 +30,7 @@ export default function Signup() {
       <Head>
         <title>Signup</title>
       </Head>
-      <Box p="2" gridArea="main">
+      <SignupLayout>
         <Heading textAlign="center">Signup</Heading>
         <VStack
           onSubmit={handleSubmit}
@@ -53,7 +54,7 @@ export default function Signup() {
             </Button>
           </Box>
         </VStack>
-      </Box>
+      </SignupLayout>
     </>
   );
 }

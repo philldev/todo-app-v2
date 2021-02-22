@@ -1,6 +1,7 @@
 import { Box, Flex, IconButton, Text, useColorMode } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { DarkIcon, LightIcon } from "./Icons";
+import NextLink from "next/link";
 
 const AppHeader = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -17,9 +18,16 @@ const AppHeader = () => {
       p="4"
       gridArea="header"
     >
-      <Text fontSize="lg" fontWeight="bold" textColor="whiteAlpha.900">
-        Todo App {randoEmoji}
-      </Text>
+      <NextLink href="/">
+        <Text
+          fontSize="lg"
+          cursor="pointer"
+          fontWeight="bold"
+          textColor="whiteAlpha.900"
+        >
+          Todo App {randoEmoji}
+        </Text>
+      </NextLink>
       <IconButton
         onClick={toggleColorMode}
         icon={colorMode === "light" ? <LightIcon /> : <DarkIcon />}
