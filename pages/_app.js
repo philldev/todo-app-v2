@@ -1,6 +1,5 @@
-import { Box, ChakraProvider, extendTheme, Grid } from "@chakra-ui/react";
-import { useState } from "react";
-import AppHeader, { Nav } from "../components/AppHeader";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import AppHeader from "../components/AppHeader";
 import AppLayout from "../components/Layout/AppLayout";
 import MobileNavbar from "../components/MobileNavbar";
 import { NavProvider } from "../context/NavContext";
