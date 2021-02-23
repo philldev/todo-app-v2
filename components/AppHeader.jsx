@@ -8,11 +8,10 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { useRouter } from "next/router";
 import { useContext } from "react";
 import NavContext from "../context/NavContext";
 import UserContext from "../context/UserContext";
-import { DarkIcon, LightIcon, HamburgerIcon } from "./Icons";
+import { DarkIcon, HamburgerIcon, LightIcon } from "./Icons";
 
 const AppHeader = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -27,7 +26,10 @@ const AppHeader = () => {
     >
       <Nav />
       <IconButton
-        onClick={toggle}
+        onClick={(e) => {
+          e.stopPropagation();
+          toggle();
+        }}
         icon={<HamburgerIcon />}
         display={{ md: "none" }}
       />
@@ -42,8 +44,7 @@ const AppHeader = () => {
 const emojis = ["😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣"];
 
 export const Nav = ({ type }) => {
-  const { logout, user } = useContext(UserContext);
-  const router = useRouter();
+  const { user } = useContext(UserContext);
   return (
     <Box
       as="nav"
@@ -60,23 +61,24 @@ export const Nav = ({ type }) => {
         m="0"
       >
         <ListItem listStyleType="none" mr="8">
-          <NextLink href="/">
+          <NextLink href={user.isLoggedIn ? "/" : "/signup"}>
             <Text
               fontSize="lg"
               cursor="pointer"
               fontWeight="bold"
               textColor="whiteAlpha.900"
+              mb={`${type === "mobile" ? "10" : "0"}`}
             >
               Todo App {emojis[Math.floor(Math.random() * emojis.length)]}
             </Text>
           </NextLink>
         </ListItem>
-        {user && (
+        {user.isLoggedIn && (
           <>
             <ListItem listStyleType="none" mr="2">
               <NextLink href="/">
                 <Text
-                  fontSize="md"
+                  fontSize={`${type === "mobile" ? "2xl" : "md"}`}
                   cursor="pointer"
                   fontWeight="bold"
                   textColor="whiteAlpha.900"
@@ -89,7 +91,7 @@ export const Nav = ({ type }) => {
             <ListItem listStyleType="none" mr="2">
               <NextLink href="/profile">
                 <Text
-                  fontSize="md"
+                  fontSize={`${type === "mobile" ? "2xl" : "md"}`}
                   cursor="pointer"
                   fontWeight="bold"
                   textColor="whiteAlpha.900"
@@ -98,21 +100,6 @@ export const Nav = ({ type }) => {
                   Profile
                 </Text>
               </NextLink>
-            </ListItem>
-            <ListItem listStyleType="none">
-              <Text
-                fontSize="md"
-                cursor="pointer"
-                fontWeight="bold"
-                textColor="whiteAlpha.900"
-                lineHeight="none"
-                onClick={() => {
-                  logout();
-                  router.push("/signup");
-                }}
-              >
-                Logout
-              </Text>
             </ListItem>
           </>
         )}

@@ -47,7 +47,11 @@ export default function profile() {
         >
           <FormControl id="username" isRequired>
             <FormLabel>Username</FormLabel>
-            <Input placeholder="John Doe" name="username" defaultValue={user} />
+            <Input
+              placeholder="John Doe"
+              name="username"
+              defaultValue={user.username}
+            />
           </FormControl>
           <Box>
             <Button
@@ -66,7 +70,7 @@ export default function profile() {
               w="100%"
               variant="outline"
               colorScheme="red"
-              onClick={(e) => {
+              onClick={() => {
                 logout();
                 router.push("/signup");
               }}

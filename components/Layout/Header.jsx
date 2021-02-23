@@ -11,7 +11,7 @@ function Header() {
       <Heading>
         {sayDay()}!{" "}
         <NextLink href="/profile">
-          <Link>{user}</Link>
+          <Link>{user.username}</Link>
         </NextLink>
       </Heading>
     </Flex>

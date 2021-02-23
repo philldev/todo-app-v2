@@ -10,7 +10,16 @@ const MotionBox = motion.custom(
       // do not pass framer props to DOM element
       Object.entries(props).filter(([key]) => !isValidMotionProp(key))
     );
-    return <Box ref={ref} background={"blackAlpha.900"} {...chakraProps} />;
+    return (
+      <Box
+        ref={ref}
+        bgGradient="linear(to-l, #7928CA, #FF0080)"
+        p="4"
+        pos="fixed"
+        inset="0"
+        {...chakraProps}
+      />
+    );
   })
 );
 
@@ -25,12 +34,8 @@ export default function MobileNavbar() {
     <MotionBox
       initial={false}
       animate={isActive ? "open" : "closed"}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.2 }}
       variants={variants}
-      p="4"
-      pos="fixed"
-      left="0"
-      insetY="0"
     >
       <Nav type="mobile" />
     </MotionBox>

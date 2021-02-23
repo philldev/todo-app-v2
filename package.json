@@ -15,6 +15,7 @@
     "next": "10.0.5",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-use-gesture": "^9.0.4",
     "shortid": "^2.2.16"
   },
   "devDependencies": {

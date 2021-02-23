@@ -15,7 +15,7 @@ function Home() {
   const router = useRouter();
 
   useDidMountEffect(() => {
-    if (!user) {
+    if (!user.isLoggedIn) {
       router.push("/signup");
     }
   }, [user]);
@@ -26,7 +26,7 @@ function Home() {
         <Head>
           <title>Todo App</title>
         </Head>
-        {user && (
+        {user.isLoggedIn && (
           <HomeLayout>
             <Header />
             <TodoForm />

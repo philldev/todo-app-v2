@@ -8,8 +8,12 @@ export const NavProvider = ({ children }) => {
   const toggle = () => {
     setIsActive((prev) => !prev);
   };
+
+  const close = () => {
+    setIsActive(false);
+  };
   return (
-    <NavContext.Provider value={{ isActive, toggle }}>
+    <NavContext.Provider value={{ isActive, toggle, close }}>
       {children}
     </NavContext.Provider>
   );
