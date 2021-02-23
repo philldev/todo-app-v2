@@ -1,10 +1,21 @@
-import { ChakraProvider, extendTheme, Grid } from "@chakra-ui/react";
-import AppHeader from "../components/AppHeader";
+import { Box, ChakraProvider, extendTheme, Grid } from "@chakra-ui/react";
+import { useState } from "react";
+import AppHeader, { Nav } from "../components/AppHeader";
+import AppLayout from "../components/Layout/AppLayout";
+import MobileNavbar from "../components/MobileNavbar";
+import { NavProvider } from "../context/NavContext";
 import { UserProvider } from "../context/UserContext";
-
 import "../styles/global.css";
 
 export const theme = extendTheme({
+  styles: {
+    global: {
+      "body, html": {
+        height: "100vh",
+        overflow: "hidden",
+      },
+    },
+  },
   fonts: {
     heading: "Josefin Sans",
     body: "Josefin Sans",
@@ -22,20 +33,13 @@ function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider theme={theme} resetCSS>
       <UserProvider>
-        <Grid
-          fontSize="base"
-          gridTemplate={`
-          "header header header" auto
-          ". main ." 1fr /
-          1fr minmax(auto, 1024px) 1fr
-          `}
-          gap="4"
-          rowGap="8"
-          h="100vh"
-        >
-          <AppHeader />
-          <Component {...pageProps} />
-        </Grid>
+        <NavProvider>
+          <MobileNavbar />
+          <AppLayout>
+            <AppHeader />
+            <Component {...pageProps} />
+          </AppLayout>
+        </NavProvider>
       </UserProvider>
     </ChakraProvider>
   );
