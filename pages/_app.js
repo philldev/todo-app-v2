@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }) {
     <ChakraProvider theme={theme} resetCSS>
       <UserProvider>
         <Grid
-          fontSize="xs"
+          fontSize="base"
           gridTemplate={`
           "header header header" auto
           ". main ." 1fr /

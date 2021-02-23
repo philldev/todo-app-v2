@@ -5,6 +5,7 @@ import {
   Flex,
   Grid,
   IconButton,
+  Input,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -14,9 +15,7 @@ import useFilter from "../../hooks/useFilter";
 import { DeleteIcon } from "../Icons";
 
 function TodoList() {
-  const { list, checkTodo, deleteTodo, deleteAllCompleted } = useContext(
-    TodoContext
-  );
+  const { list, deleteAllCompleted } = useContext(TodoContext);
   const { filteredList, selectFilter, filters, filter } = useFilter();
 
   const completeCount = list.filter((i) => i.isDone).length;
@@ -39,25 +38,13 @@ function TodoList() {
           justifyContent="flex-start"
           height="8"
         >
-          {filters.map((item) => (
-            <Box
-              as="li"
-              listStyleType="none"
-              maxW="max-content"
-              key={item.code}
-              cursor="pointer"
-              onClick={() => selectFilter(item.code)}
-            >
-              <Text
-                fontWeight="bold"
-                borderBottom={`${item.code === filter ? "2px solid" : ""}`}
-                borderColor="brand.600"
-                display="inline"
-                whiteSpace="nowrap"
-              >
-                {item.label}
-              </Text>
-            </Box>
+          {filters.map((item, idx) => (
+            <FilterItem
+              key={idx}
+              item={item}
+              filter={filter}
+              selectFilter={selectFilter}
+            />
           ))}
 
           {completeCount ? (
@@ -77,11 +64,7 @@ function TodoList() {
           {filteredList(list).length ? (
             filteredList(list).map((item) => (
               <Box as="li" key={item.id}>
-                <TodoItem
-                  item={item}
-                  checkTodo={checkTodo}
-                  deleteTodo={deleteTodo}
-                />
+                <TodoItem item={item} />
               </Box>
             ))
           ) : (
@@ -93,12 +76,42 @@ function TodoList() {
   );
 }
 
-function TodoItem({ item, checkTodo, deleteTodo }) {
+function FilterItem({ item, selectFilter, filter }) {
+  return (
+    <Box
+      as="li"
+      listStyleType="none"
+      maxW="max-content"
+      key={item.code}
+      cursor="pointer"
+      onClick={() => selectFilter(item.code)}
+    >
+      <Text
+        fontWeight="bold"
+        borderBottom={`${item.code === filter ? "2px solid" : ""}`}
+        borderColor="brand.600"
+        display="inline"
+        whiteSpace="nowrap"
+      >
+        {item.label}
+      </Text>
+    </Box>
+  );
+}
+
+function TodoItem({ item }) {
+  const { checkTodo, deleteTodo, editTodo } = useContext(TodoContext);
   const handleCheck = () => {
     checkTodo(item);
   };
   const handleDelete = () => {
     deleteTodo(item);
+  };
+  const handleChange = (evt) => {
+    editTodo({
+      ...item,
+      text: evt.target.value,
+    });
   };
   return (
     <Grid
@@ -111,12 +124,15 @@ function TodoItem({ item, checkTodo, deleteTodo }) {
         defaultChecked={item.isDone}
         onChange={handleCheck}
       />
-      <Text
+      <Input
         textDecor={`${item.isDone ? "line-through" : "normal"}`}
         opacity={`${item.isDone ? "0.5" : "1"}`}
-      >
-        {item.text}
-      </Text>
+        type="text"
+        value={item.text}
+        onChange={handleChange}
+        size="md"
+      />
+
       <IconButton
         bgColor="transparent"
         aria-label="Search database"

@@ -1,26 +1,8 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext } from "react";
 import shortid from "shortid";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 export const TodoContext = createContext();
-
-const data = [
-  {
-    text: "todo 1",
-    id: 1,
-    isDone: false,
-  },
-  {
-    text: "todo 2",
-    id: 2,
-    isDone: false,
-  },
-  {
-    text: "todo 3",
-    id: 3,
-    isDone: true,
-  },
-];
 
 export function TodoProvider({ children }) {
   const [list, setList] = useLocalStorage("todo-list", []);
@@ -45,9 +27,20 @@ export function TodoProvider({ children }) {
     setList(list.filter((i) => !i.isDone));
   };
 
+  const editTodo = (todo) => {
+    setList((prev) => prev.map((i) => (i.id === todo.id ? todo : i)));
+  };
+
   return (
     <TodoContext.Provider
-      value={{ list, addTodo, deleteTodo, checkTodo, deleteAllCompleted }}
+      value={{
+        list,
+        addTodo,
+        deleteTodo,
+        checkTodo,
+        deleteAllCompleted,
+        editTodo,
+      }}
     >
       {children}
     </TodoContext.Provider>
