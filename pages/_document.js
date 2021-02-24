@@ -11,6 +11,10 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <meta
+            name="viewport"
+            content="initial-scale=1, viewport-fit=cover, user-scalable=no"
+          />
           <link
             rel="apple-touch-icon"
             sizes="180x180"
