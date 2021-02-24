@@ -11,31 +11,31 @@ import NextLink from "next/link";
 import { useContext } from "react";
 import NavContext from "../context/NavContext";
 import UserContext from "../context/UserContext";
-import { DarkIcon, HamburgerIcon, LightIcon } from "./Icons";
+import { DarkIcon, DeleteIcon, HamburgerIcon, LightIcon } from "./Icons";
 
 const AppHeader = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const { toggle } = useContext(NavContext);
+  const { toggle, isActive } = useContext(NavContext);
   return (
     <Flex
       bgGradient="linear(to-l, #7928CA, #FF0080)"
       justifyContent="space-between"
       alignItems="center"
-      p="4"
       gridArea="header"
+      p="2"
     >
       <Nav />
+      <IconButton
+        onClick={toggleColorMode}
+        icon={colorMode === "light" ? <LightIcon /> : <DarkIcon />}
+      />
       <IconButton
         onClick={(e) => {
           e.stopPropagation();
           toggle();
         }}
-        icon={<HamburgerIcon />}
+        icon={!isActive ? <HamburgerIcon /> : <DeleteIcon />}
         display={{ md: "none" }}
-      />
-      <IconButton
-        onClick={toggleColorMode}
-        icon={colorMode === "light" ? <LightIcon /> : <DarkIcon />}
       />
     </Flex>
   );

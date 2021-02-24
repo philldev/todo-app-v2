@@ -22,33 +22,26 @@ function TodoList() {
 
   return (
     <Box overflowY="auto" maxH="100%" pos="relative">
-      <VStack
-        p="2"
-        pos="absolute"
-        inset="0"
-        align="stretch"
-        spacing="4"
-        maxH="min"
-      >
-        <Flex
-          as="ul"
-          alignItems="center"
-          flexWrap="wrap"
-          gridGap="2"
-          justifyContent="flex-start"
-          height="8"
-        >
-          {filters.map((item, idx) => (
-            <FilterItem
-              key={idx}
-              item={item}
-              filter={filter}
-              selectFilter={selectFilter}
-            />
-          ))}
+      <VStack pos="absolute" inset="0" align="stretch" spacing="4" maxH="min">
+        {list.length && (
+          <Flex
+            as="ul"
+            alignItems="center"
+            flexWrap="nowrap"
+            gridGap="2"
+            p="2"
+            justifyContent="flex-start"
+          >
+            {filters.map((item, idx) => (
+              <FilterItem
+                key={idx}
+                item={item}
+                filter={filter}
+                selectFilter={selectFilter}
+              />
+            ))}
 
-          {completeCount ? (
-            <Box as="li" maxW="max-content">
+            {completeCount ? (
               <Button
                 variant="outline"
                 colorScheme="red"
@@ -57,9 +50,9 @@ function TodoList() {
               >
                 Delete Completed
               </Button>
-            </Box>
-          ) : null}
-        </Flex>
+            ) : null}
+          </Flex>
+        )}
         <VStack as="ul" align="stretch" spacing="4">
           {filteredList(list).length ? (
             filteredList(list).map((item) => (
@@ -68,7 +61,7 @@ function TodoList() {
               </Box>
             ))
           ) : (
-            <Text>It's empty</Text>
+            <Text textAlign="center">It's empty 🥱</Text>
           )}
         </VStack>
       </VStack>
@@ -78,24 +71,19 @@ function TodoList() {
 
 function FilterItem({ item, selectFilter, filter }) {
   return (
-    <Box
-      as="li"
-      listStyleType="none"
-      maxW="max-content"
-      key={item.code}
-      cursor="pointer"
-      onClick={() => selectFilter(item.code)}
-    >
+    <Button key={item.code} size="xs" onClick={() => selectFilter(item.code)}>
       <Text
+        as="span"
         fontWeight="bold"
-        borderBottom={`${item.code === filter ? "2px solid" : ""}`}
-        borderColor="brand.600"
+        borderBottom="2px solid"
+        borderColor={`${item.code === filter ? "brand.600" : "transparent"}`}
+        _focus={{ boxShadow: "none" }}
         display="inline"
         whiteSpace="nowrap"
       >
         {item.label}
       </Text>
-    </Box>
+    </Button>
   );
 }
 

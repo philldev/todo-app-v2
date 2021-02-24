@@ -11,25 +11,13 @@ const MotionBox = motion.custom(
     return <Box ref={ref} {...chakraProps} />;
   })
 );
-const variants = {
-  open: { scale: 0.8, x: "50%" },
-  closed: { scale: 1, x: 0 },
-};
 
 export default function AppLayout({ children }) {
   const { isActive, close } = useContext(NavContext);
   const bg = useColorModeValue("gray.100", "gray.900");
   const color = useColorModeValue("gray.700", "gray.100");
   return (
-    <MotionBox
-      animate={isActive ? "open" : "closed"}
-      variants={variants}
-      transition={{ duration: 0.3 }}
-      initial={false}
-      zIndex="99"
-      onClick={close}
-      pos="relative"
-    >
+    <MotionBox onClick={close} pos="relative">
       <Grid
         bg={bg}
         color={color}
