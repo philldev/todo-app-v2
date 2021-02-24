@@ -5,7 +5,6 @@ import {
   IconButton,
   Link,
   useColorMode,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -16,7 +15,7 @@ import { DarkIcon, DeleteIcon, HamburgerIcon, LightIcon } from "./Icons";
 
 const AppHeader = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const { toggle, isActive } = useContext(NavContext);
+  const { toggle, isActive, close } = useContext(NavContext);
   return (
     <Flex
       // bgGradient="linear(to-l, #7928CA, #FF0080)"
@@ -47,6 +46,9 @@ const AppHeader = () => {
           onClick={(e) => {
             e.stopPropagation();
             toggle();
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") close();
           }}
           icon={!isActive ? <HamburgerIcon /> : <DeleteIcon />}
           display={{ md: "none" }}

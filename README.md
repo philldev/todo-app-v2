@@ -8,8 +8,9 @@ Todo :
 - (x) Add Logout implementations
 
 bugs :
-- () mobile navbar first render appear on the screen
+
+- (x) mobile navbar first render appear on the screen
 
 fixes :
 
-- () desktop nav
+- (x) desktop nav

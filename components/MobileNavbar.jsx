@@ -1,6 +1,5 @@
 import {
   Box,
-  Divider,
   forwardRef,
   Grid,
   Heading,
@@ -9,14 +8,13 @@ import {
 } from "@chakra-ui/react";
 import { isValidMotionProp, motion } from "framer-motion";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 import { useContext } from "react";
 import NavContext from "../context/NavContext";
-import { useRouter } from "next/router";
 
 const MotionBox = motion.custom(
   forwardRef((props, ref) => {
     const chakraProps = Object.fromEntries(
-      // do not pass framer props to DOM element
       Object.entries(props).filter(([key]) => !isValidMotionProp(key))
     );
     return (
@@ -67,7 +65,10 @@ export default function MobileNavbar() {
             <Link
               bg={`${item.href === router.pathname ? "brand.600" : ""}`}
               p="2"
-              _hover={{ bg: "gray.600", color: "gray.100" }}
+              _hover={{
+                bg: `${item.href === router.pathname ? "" : "gray.600"}`,
+                color: "gray.100",
+              }}
               color={`${
                 item.href === router.pathname ? "gray.100" : "inherit"
               }`}
