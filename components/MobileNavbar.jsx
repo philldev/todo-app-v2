@@ -25,6 +25,7 @@ const MotionBox = motion.custom(
         pos="fixed"
         insetY="0"
         left="0"
+        transform="translateX(-100vw)"
         width="50vw"
         zIndex="overlay"
         shadow="dark-lg"

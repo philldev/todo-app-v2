@@ -7,6 +7,9 @@ Todo :
 - (x) Add sidebar
 - (x) Add Logout implementations
 
-bugs
+bugs :
+- () mobile navbar first render appear on the screen
 
+fixes :
 
+- () desktop nav

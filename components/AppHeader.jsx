@@ -1,13 +1,14 @@
 import {
   Box,
+  Container,
   Flex,
   IconButton,
-  ListItem,
-  Text,
-  UnorderedList,
+  Link,
   useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 import { useContext } from "react";
 import NavContext from "../context/NavContext";
 import UserContext from "../context/UserContext";
@@ -18,92 +19,73 @@ const AppHeader = () => {
   const { toggle, isActive } = useContext(NavContext);
   return (
     <Flex
-      bgGradient="linear(to-l, #7928CA, #FF0080)"
-      justifyContent="space-between"
-      alignItems="center"
+      // bgGradient="linear(to-l, #7928CA, #FF0080)"
+      bg="gray.700"
+      color="gray.100"
       gridArea="header"
       p="2"
     >
-      <Nav />
-      <IconButton
-        onClick={toggleColorMode}
-        icon={colorMode === "light" ? <LightIcon /> : <DarkIcon />}
-      />
-      <IconButton
-        onClick={(e) => {
-          e.stopPropagation();
-          toggle();
-        }}
-        icon={!isActive ? <HamburgerIcon /> : <DeleteIcon />}
-        display={{ md: "none" }}
-      />
+      <Container
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        maxW="container.lg"
+        p="0"
+      >
+        <Nav />
+        <IconButton
+          onClick={toggleColorMode}
+          bg="gray.700"
+          _hover={{
+            bg: "gray.600",
+          }}
+          icon={colorMode === "light" ? <LightIcon /> : <DarkIcon />}
+        />
+        <IconButton
+          bg="inherit"
+          _hover={{ bg: "gray.600" }}
+          onClick={(e) => {
+            e.stopPropagation();
+            toggle();
+          }}
+          icon={!isActive ? <HamburgerIcon /> : <DeleteIcon />}
+          display={{ md: "none" }}
+        />
+      </Container>
     </Flex>
   );
 };
 
-const emojis = ["😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣"];
-
-export const Nav = ({ type }) => {
+export const Nav = () => {
   const { user } = useContext(UserContext);
+  const router = useRouter();
+  if (!user.isLoggedIn) return null;
   return (
-    <Box
-      as="nav"
-      display={{
-        base: `${type !== "mobile" ? "none" : "block"}`,
-        md: `${type !== "mobile" ? "block" : "none"}`,
-      }}
-    >
-      <UnorderedList
-        display="flex"
-        flexDir={`${type === "mobile" ? "column" : "row"}`}
-        alignItems={`${type === "mobile" ? "flex-start" : "center"}`}
-        spacing={`${type === "mobile" ? "4" : "0"}`}
-        m="0"
-      >
-        <ListItem listStyleType="none" mr="8">
-          <NextLink href={user.isLoggedIn ? "/" : "/signup"}>
-            <Text
-              fontSize="lg"
-              cursor="pointer"
+    <Box display={{ base: "none", md: "block" }}>
+      {[
+        { label: "Todos", href: "/" },
+        { label: "Profile", href: "/profile" },
+      ].map((item, idx) => {
+        const isLinkActive = item.href === router.pathname;
+        return (
+          <NextLink key={idx} href={item.href}>
+            <Link
+              display="inline-block"
+              h="full"
               fontWeight="bold"
-              textColor="whiteAlpha.900"
-              mb={`${type === "mobile" ? "10" : "0"}`}
+              px="4"
+              borderBottom="2px solid transparent"
+              borderBottomColor={`${isLinkActive ? "brand.600" : ""}`}
+              _hover={{
+                textDecor: "none",
+                borderBottomColor: `${!isLinkActive ? "gray.600" : ""}`,
+              }}
             >
-              Todo App {emojis[Math.floor(Math.random() * emojis.length)]}
-            </Text>
+              {item.label}
+            </Link>
           </NextLink>
-        </ListItem>
-        {user.isLoggedIn && (
-          <>
-            <ListItem listStyleType="none" mr="2">
-              <NextLink href="/">
-                <Text
-                  fontSize={`${type === "mobile" ? "2xl" : "md"}`}
-                  cursor="pointer"
-                  fontWeight="bold"
-                  textColor="whiteAlpha.900"
-                  lineHeight="none"
-                >
-                  Todos
-                </Text>
-              </NextLink>
-            </ListItem>
-            <ListItem listStyleType="none" mr="2">
-              <NextLink href="/profile">
-                <Text
-                  fontSize={`${type === "mobile" ? "2xl" : "md"}`}
-                  cursor="pointer"
-                  fontWeight="bold"
-                  textColor="whiteAlpha.900"
-                  lineHeight="none"
-                >
-                  Profile
-                </Text>
-              </NextLink>
-            </ListItem>
-          </>
-        )}
-      </UnorderedList>
+        );
+      })}
     </Box>
   );
 };
