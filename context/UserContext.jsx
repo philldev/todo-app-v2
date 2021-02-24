@@ -28,7 +28,7 @@ export const UserProvider = ({ children }) => {
     setUserLSValue({ username: null, isLoggedIn: false });
   };
   const edit = (newUsername) => {
-    setUserLSValue(newUsername);
+    setUserLSValue({ ...user, username: newUsername });
   };
   useEffect(() => {
     setUser(() => {
