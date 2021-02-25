@@ -33,11 +33,15 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
+        <meta charSet="utf-8" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta
           name="viewport"
-          content="initial-scale=1, viewport-fit=cover, user-scalable=no"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
         />
         <meta name="description" content="A simple todo list web app" />
+        <meta name="keywords" content="Todo list App, Todo App, Productivity" />
+        <meta name="theme-color" content="#5f27cd" />
         <link
           rel="apple-touch-icon"
           sizes="180x180"

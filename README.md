@@ -11,6 +11,8 @@ Todo :
 
 - (x) refactor code
 
+- () add PWA
+
 bugs :
 
 - (x) mobile navbar first render appear on the screen
