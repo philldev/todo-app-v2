@@ -38,24 +38,27 @@ const TodoList = () => {
               justifyContent="flex-start"
             >
               {filters.map((item, idx) => (
-                <FilterItem
-                  key={idx}
-                  item={item}
-                  filter={filter}
-                  selectFilter={selectFilter}
-                />
+                <Box key={idx} as="li">
+                  <FilterItem
+                    item={item}
+                    filter={filter}
+                    selectFilter={selectFilter}
+                  />
+                </Box>
               ))}
 
               {completeCount ? (
-                <Button
-                  flex="0 0 auto"
-                  variant="outline"
-                  colorScheme="red"
-                  size="xs"
-                  onClick={() => deleteAllCompleted()}
-                >
-                  Delete Completed
-                </Button>
+                <Box as="li">
+                  <Button
+                    flex="0 0 auto"
+                    variant="outline"
+                    colorScheme="red"
+                    size="xs"
+                    onClick={() => deleteAllCompleted()}
+                  >
+                    Delete Completed
+                  </Button>
+                </Box>
               ) : null}
             </Flex>
           </Box>
@@ -108,20 +111,20 @@ function TodoItem({ item }) {
       alignItems="center"
       gridTemplateColumns="max-content auto max-content"
     >
-      <label htmlFor="check-todo" style={{ display: "none" }}>
+      <label htmlFor={`check-todo-${item.id}`} style={{ display: "none" }}>
         Toggle Todo
       </label>
       <Checkbox
-        id="check-todo"
+        id={`check-todo-$${item.id}`}
         type="checkbox"
         defaultChecked={item.isDone}
         onChange={handleCheck}
       />
-      <label style={{ display: "none" }} htmlFor="edit-todo">
+      <label style={{ display: "none" }} htmlFor={`edit-todo-${item.id}`}>
         Edit Todo
       </label>
       <Input
-        id="edit-todo"
+        id={`edit-todo-${item.id}`}
         textDecor={`${item.isDone ? "line-through" : "normal"}`}
         opacity={`${item.isDone ? "0.5" : "1"}`}
         type="text"
