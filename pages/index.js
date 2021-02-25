@@ -1,13 +1,16 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useContext } from "react";
-import Header from "../components/Layout/Header";
+// components
 import HomeLayout from "../components/Layout/HomeLayout";
-import TodoForm from "../components/TodoForm/TodoForm";
-import TodoInfo from "../components/TodoInfo/TodoInfo";
-import TodoList from "../components/TodoList/TodoList";
+import TodoHeader from "../components/Todo/TodoHeader";
+import TodoForm from "../components/Todo/TodoForm";
+import TodoInfo from "../components/Todo/TodoInfo";
+import TodoList from "../components/Todo/TodoList";
+// context
 import { TodoProvider } from "../context/TodoContext";
 import UserContext from "../context/UserContext";
+// Hooks
 import useDidMountEffect from "../hooks/useDidMountEffect";
 
 function Home() {
@@ -28,7 +31,7 @@ function Home() {
         </Head>
         {user.isLoggedIn && (
           <HomeLayout>
-            <Header />
+            <TodoHeader />
             <TodoForm />
             <TodoList />
             <TodoInfo />

@@ -1,11 +1,9 @@
 import { Flex, IconButton, Input } from "@chakra-ui/react";
-import { useContext, useState } from "react";
-import { TodoContext } from "../../context/TodoContext";
 import { AddIcon } from "../Icons";
+import useTodoForm from "./hooks/useTodoForm";
 
-function TodoForm() {
-  const [text, setText] = useState("");
-  const { addTodo } = useContext(TodoContext);
+const TodoForm = () => {
+  const { text, setText, addTodo } = useTodoForm();
   return (
     <Flex gridGap={4} p="2">
       <Input
@@ -32,6 +30,6 @@ function TodoForm() {
       />
     </Flex>
   );
-}
+};
 
 export default TodoForm;

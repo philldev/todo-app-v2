@@ -31,9 +31,12 @@ export function TodoProvider({ children }) {
     setList((prev) => prev.map((i) => (i.id === todo.id ? todo : i)));
   };
 
+  const completeCount = list.filter((i) => i.isDone).length;
+
   return (
     <TodoContext.Provider
       value={{
+        completeCount,
         list,
         addTodo,
         deleteTodo,

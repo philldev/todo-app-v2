@@ -14,12 +14,11 @@ import { useContext } from "react";
 import { TodoContext } from "../../context/TodoContext";
 import useFilter from "../../hooks/useFilter";
 import { DeleteIcon } from "../Icons";
+import useTodoItem from "./hooks/useTodoItem";
 
-function TodoList() {
-  const { list, deleteAllCompleted } = useContext(TodoContext);
+const TodoList = () => {
+  const { completeCount, list, deleteAllCompleted } = useContext(TodoContext);
   const { filteredList, selectFilter, filters, filter } = useFilter();
-
-  const completeCount = list.filter((i) => i.isDone).length;
 
   return (
     <Box maxH="100%" overflow="hidden">
@@ -79,44 +78,30 @@ function TodoList() {
       </Box>
     </Box>
   );
-}
+};
 
-function FilterItem({ item, selectFilter, filter }) {
-  return (
-    <Button
-      key={item.code}
-      size="xs"
-      _focus={{ boxShadow: "none" }}
-      onClick={() => selectFilter(item.code)}
+const FilterItem = ({ item, selectFilter, filter }) => (
+  <Button
+    key={item.code}
+    size="xs"
+    _focus={{ boxShadow: "none" }}
+    onClick={() => selectFilter(item.code)}
+  >
+    <Text
+      as="span"
+      fontWeight="bold"
+      borderBottom="2px solid"
+      borderColor={`${item.code === filter ? "brand.600" : "transparent"}`}
+      display="inline"
+      flex="0 0 auto"
     >
-      <Text
-        as="span"
-        fontWeight="bold"
-        borderBottom="2px solid"
-        borderColor={`${item.code === filter ? "brand.600" : "transparent"}`}
-        display="inline"
-        flex="0 0 auto"
-      >
-        {item.label}
-      </Text>
-    </Button>
-  );
-}
+      {item.label}
+    </Text>
+  </Button>
+);
 
 function TodoItem({ item }) {
-  const { checkTodo, deleteTodo, editTodo } = useContext(TodoContext);
-  const handleCheck = () => {
-    checkTodo(item);
-  };
-  const handleDelete = () => {
-    deleteTodo(item);
-  };
-  const handleChange = (evt) => {
-    editTodo({
-      ...item,
-      text: evt.target.value,
-    });
-  };
+  const { handleCheck, handleChange, handleDelete } = useTodoItem(item);
   return (
     <Grid
       gap="2"

@@ -1,8 +1,8 @@
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import Head from "next/head";
-import AppHeader from "../components/AppHeader";
 import AppLayout from "../components/Layout/AppLayout";
 import MobileNavbar from "../components/MobileNavbar";
+import Navbar from "../components/Navbar";
 import { NavProvider } from "../context/NavContext";
 import { UserProvider } from "../context/UserContext";
 import "../styles/global.css";
@@ -66,7 +66,7 @@ function MyApp({ Component, pageProps }) {
           <NavProvider>
             <MobileNavbar />
             <AppLayout>
-              <AppHeader />
+              <Navbar />
               <Component {...pageProps} />
             </AppLayout>
           </NavProvider>

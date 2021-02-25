@@ -7,6 +7,8 @@ Todo :
 - (x) Add sidebar
 - (x) Add Logout implementations
 
+- (x) refactor code
+
 bugs :
 
 - (x) mobile navbar first render appear on the screen

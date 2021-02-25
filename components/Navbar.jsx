@@ -13,7 +13,7 @@ import NavContext from "../context/NavContext";
 import UserContext from "../context/UserContext";
 import { DarkIcon, DeleteIcon, HamburgerIcon, LightIcon } from "./Icons";
 
-const AppHeader = () => {
+const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { toggle, isActive, close } = useContext(NavContext);
   return (
@@ -86,4 +86,4 @@ export const Nav = () => {
   );
 };
 
-export default AppHeader;
+export default Navbar;

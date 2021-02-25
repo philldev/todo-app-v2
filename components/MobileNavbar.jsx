@@ -38,7 +38,6 @@ export default function MobileNavbar() {
   const bg = useColorModeValue("gray.100", "gray.800");
   const color = useColorModeValue("gray.700", "gray.100");
   const router = useRouter();
-
   return (
     <MotionBox
       pos="fixed"

@@ -1,21 +1,12 @@
-import { Box, forwardRef, Grid, Text } from "@chakra-ui/react";
-import { isValidMotionProp, motion } from "framer-motion";
+import { Box, Grid, Text } from "@chakra-ui/react";
 import { useContext } from "react";
 import { TodoContext } from "../../context/TodoContext";
 import { CompleteIcon } from "../Icons";
+import MotionBox from "../motion/MotionBox";
 
-const MotionBox = motion.custom(
-  forwardRef((props, ref) => {
-    const chakraProps = Object.fromEntries(
-      Object.entries(props).filter(([key]) => !isValidMotionProp(key))
-    );
-    return <Box ref={ref} {...chakraProps} />;
-  })
-);
+const TodoInfo = () => {
+  const { list, completeCount } = useContext(TodoContext);
 
-function TodoInfo() {
-  const { list } = useContext(TodoContext);
-  const completeCount = list.filter((i) => i.isDone).length;
   if (!list.length) {
     return null;
   }
@@ -53,6 +44,6 @@ function TodoInfo() {
       </Box>
     </Grid>
   );
-}
+};
 
 export default TodoInfo;

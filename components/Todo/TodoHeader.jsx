@@ -2,8 +2,9 @@ import { Flex, Heading, Link } from "@chakra-ui/react";
 import { useContext } from "react";
 import UserContext from "../../context/UserContext";
 import NextLink from "next/link";
+import sayDay from "./utils/sayDay";
 
-function Header() {
+const Header = () => {
   const { user } = useContext(UserContext);
 
   return (
@@ -16,19 +17,5 @@ function Header() {
       </Heading>
     </Flex>
   );
-}
-
-const sayDay = () => {
-  const today = new Date();
-  const curHr = today.getHours();
-
-  if (curHr < 12) {
-    return "Good morning";
-  } else if (curHr < 18) {
-    return "Good afternoon";
-  } else {
-    return "Good evening";
-  }
 };
-
 export default Header;
