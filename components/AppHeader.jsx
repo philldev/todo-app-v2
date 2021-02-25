@@ -17,13 +17,7 @@ const AppHeader = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { toggle, isActive, close } = useContext(NavContext);
   return (
-    <Flex
-      // bgGradient="linear(to-l, #7928CA, #FF0080)"
-      bg="gray.700"
-      color="gray.100"
-      gridArea="header"
-      p="2"
-    >
+    <Flex bg="gray.700" color="gray.100" gridArea="header" p="2">
       <Container
         display="flex"
         justifyContent="space-between"

@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import SignupLayout from "../components/Layout/SignupLayout";
 import UserContext from "../context/UserContext";
 

@@ -4,9 +4,10 @@ import {
   Grid,
   Heading,
   Link,
+  Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { isValidMotionProp, motion } from "framer-motion";
+import { AnimateSharedLayout, isValidMotionProp, motion } from "framer-motion";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { useContext } from "react";
@@ -17,25 +18,19 @@ const MotionBox = motion.custom(
     const chakraProps = Object.fromEntries(
       Object.entries(props).filter(([key]) => !isValidMotionProp(key))
     );
-    return (
-      <Box
-        ref={ref}
-        pos="fixed"
-        insetY="0"
-        left="0"
-        transform="translateX(-100vw)"
-        width="50vw"
-        zIndex="overlay"
-        shadow="dark-lg"
-        {...chakraProps}
-      />
-    );
+    return <Box ref={ref} {...chakraProps} />;
   })
 );
 
 const variants = {
   closed: { x: "-100vw" },
   open: { x: 0 },
+};
+
+const spring = {
+  type: "spring",
+  stiffness: 500,
+  damping: 30,
 };
 
 export default function MobileNavbar() {
@@ -46,6 +41,13 @@ export default function MobileNavbar() {
 
   return (
     <MotionBox
+      pos="fixed"
+      insetY="0"
+      left="0"
+      transform="translateX(-100vw)"
+      width="50vw"
+      zIndex="overlay"
+      shadow="dark-lg"
       bg={bg}
       color={color}
       initial={false}
@@ -56,28 +58,42 @@ export default function MobileNavbar() {
       <Box textAlign="center" p={2} pt="2">
         <Heading>Todo App</Heading>
       </Box>
-      <Grid as="nav">
-        {[
-          { label: "Todos", href: "/" },
-          { label: "Profile", href: "/profile" },
-        ].map((item, idx) => (
-          <NextLink key={idx} href={item.href}>
-            <Link
-              bg={`${item.href === router.pathname ? "brand.600" : ""}`}
-              p="2"
-              _hover={{
-                bg: `${item.href === router.pathname ? "" : "gray.600"}`,
-                color: "gray.100",
-              }}
-              color={`${
-                item.href === router.pathname ? "gray.100" : "inherit"
-              }`}
-            >
-              {item.label}
-            </Link>
-          </NextLink>
-        ))}
-      </Grid>
+      <AnimateSharedLayout>
+        <Grid as="nav">
+          {[
+            { label: "Todos", href: "/" },
+            { label: "Profile", href: "/profile" },
+          ].map((item, idx) => (
+            <NextLink key={idx} href={item.href}>
+              <Link
+                pos="relative"
+                bg={`${item.href === router.pathname ? "brand.600" : ""}`}
+                p="2"
+                _hover={{
+                  bg: `${item.href === router.pathname ? "" : "gray.600"}`,
+                  color: "gray.100",
+                }}
+                color={`${
+                  item.href === router.pathname ? "gray.100" : "inherit"
+                }`}
+              >
+                {item.href === router.pathname && (
+                  <MotionBox
+                    pos="absolute"
+                    inset="0"
+                    bg="brand.600"
+                    layoutId="bgColor"
+                    initial={false}
+                    animate={{ backgroundColor: "rgba(95, 39, 205,1.0)" }}
+                    spring={spring}
+                  />
+                )}
+                <Text pos="relative">{item.label}</Text>
+              </Link>
+            </NextLink>
+          ))}
+        </Grid>
+      </AnimateSharedLayout>
     </MotionBox>
   );
 }

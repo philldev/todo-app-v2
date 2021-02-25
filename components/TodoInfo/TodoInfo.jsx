@@ -1,7 +1,18 @@
-import { Box, Grid, Text } from "@chakra-ui/react";
+import { Box, forwardRef, Grid, Text } from "@chakra-ui/react";
+import { isValidMotionProp, motion } from "framer-motion";
 import { useContext } from "react";
 import { TodoContext } from "../../context/TodoContext";
 import { CompleteIcon } from "../Icons";
+
+const MotionBox = motion.custom(
+  forwardRef((props, ref) => {
+    const chakraProps = Object.fromEntries(
+      // do not pass framer props to DOM element
+      Object.entries(props).filter(([key]) => !isValidMotionProp(key))
+    );
+    return <Box ref={ref} {...chakraProps} />;
+  })
+);
 
 function TodoInfo() {
   const { list } = useContext(TodoContext);
@@ -22,13 +33,23 @@ function TodoInfo() {
           </Box>
         )}
       </Text>
-      <Box pos="relative" h="4" bgColor="gray.500">
-        <Box
-          w={`${(completeCount / list.length) * 100}%`}
+      <Box
+        pos="relative"
+        h="4"
+        bgColor="gray.300"
+        shadow="inner"
+        borderRadius="base"
+      >
+        <MotionBox
+          initial={{ width: 0 }}
+          animate={{ width: `${(completeCount / list.length) * 100}%` }}
+          transition={{ duration: 0.2 }}
+          borderRadius="base"
+          borderRightRadius={`${completeCount === list.length ? "base" : 0}`}
           pos="absolute"
           inset="0"
-          backgroundColor="green.300"
-        ></Box>
+          bgGradient="linear(to-l, #7928CA, #FF0080)"
+        />
       </Box>
     </Grid>
   );
