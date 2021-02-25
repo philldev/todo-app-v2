@@ -7,7 +7,7 @@ function TodoForm() {
   const [text, setText] = useState("");
   const { addTodo } = useContext(TodoContext);
   return (
-    <Flex gridGap={4}>
+    <Flex gridGap={4} p="2">
       <Input
         onKeyPress={(evt) => {
           if (evt.key === "Enter") {

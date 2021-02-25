@@ -68,8 +68,7 @@ export default function profile() {
               display="block"
               size="md"
               w="100%"
-              variant="outline"
-              colorScheme="red"
+              variant="unstyled"
               onClick={() => {
                 logout();
                 router.push("/signup");

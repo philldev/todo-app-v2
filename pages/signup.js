@@ -43,13 +43,7 @@ export default function Signup() {
             <Input placeholder="John Doe" name="username" />
           </FormControl>
           <Box>
-            <Button
-              display="block"
-              size="md"
-              w="100%"
-              type="submit"
-              colorScheme="blue"
-            >
+            <Button display="block" size="md" w="100%" type="submit">
               Signup
             </Button>
           </Box>

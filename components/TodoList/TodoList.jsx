@@ -4,6 +4,7 @@ import {
   Checkbox,
   Flex,
   Grid,
+  Heading,
   IconButton,
   Input,
   Text,
@@ -21,65 +22,80 @@ function TodoList() {
   const completeCount = list.filter((i) => i.isDone).length;
 
   return (
-    <Box overflowY="auto" maxH="100%" pos="relative">
-      <VStack pos="absolute" inset="0" align="stretch" spacing="4" maxH="min">
-        {list.length && (
-          <Flex
-            as="ul"
-            alignItems="center"
-            flexWrap="nowrap"
-            gridGap="2"
-            p="2"
-            justifyContent="flex-start"
-          >
-            {filters.map((item, idx) => (
-              <FilterItem
-                key={idx}
-                item={item}
-                filter={filter}
-                selectFilter={selectFilter}
-              />
-            ))}
+    <Box maxH="100%" overflow="hidden">
+      {list.length && (
+        <Box mb="4" p="2">
+          <Heading mb="2" fontSize="lg">
+            Filters
+          </Heading>
+          <Box overflowX="auto">
+            <Flex
+              overflowX="auto"
+              w="min"
+              as="ul"
+              alignItems="center"
+              flexWrap="nowrap"
+              gridGap="2"
+              justifyContent="flex-start"
+            >
+              {filters.map((item, idx) => (
+                <FilterItem
+                  key={idx}
+                  item={item}
+                  filter={filter}
+                  selectFilter={selectFilter}
+                />
+              ))}
 
-            {completeCount ? (
-              <Button
-                variant="outline"
-                colorScheme="red"
-                size="xs"
-                onClick={() => deleteAllCompleted()}
-              >
-                Delete Completed
-              </Button>
-            ) : null}
-          </Flex>
-        )}
-        <VStack as="ul" align="stretch" spacing="4">
-          {filteredList(list).length ? (
-            filteredList(list).map((item) => (
-              <Box as="li" key={item.id}>
-                <TodoItem item={item} />
-              </Box>
-            ))
-          ) : (
-            <Text textAlign="center">It's empty 🥱</Text>
-          )}
-        </VStack>
-      </VStack>
+              {completeCount ? (
+                <Button
+                  flex="0 0 auto"
+                  variant="outline"
+                  colorScheme="red"
+                  size="xs"
+                  onClick={() => deleteAllCompleted()}
+                >
+                  Delete Completed
+                </Button>
+              ) : null}
+            </Flex>
+          </Box>
+        </Box>
+      )}
+      <Box overflowY="auto" h="full" pos="relative">
+        <Box pos="absolute" inset="0" maxH="min">
+          <VStack as="ul" align="stretch" spacing="4" p="2">
+            {filteredList(list).length ? (
+              filteredList(list).map((item) => (
+                <Box as="li" listStyleType="none" key={item.id}>
+                  <TodoItem item={item} />
+                </Box>
+              ))
+            ) : (
+              <Text textAlign="center">It's empty 🥱</Text>
+            )}
+          </VStack>
+        </Box>
+      </Box>
     </Box>
   );
 }
 
 function FilterItem({ item, selectFilter, filter }) {
   return (
-    <Button key={item.code} size="xs" onClick={() => selectFilter(item.code)}>
+    <Button
+      key={item.code}
+      size="xs"
+      _focus={{ boxShadow: "none" }}
+      onClick={() => selectFilter(item.code)}
+    >
       <Text
         as="span"
         fontWeight="bold"
         borderBottom="2px solid"
         borderColor={`${item.code === filter ? "brand.600" : "transparent"}`}
-        _focus={{ boxShadow: "none" }}
         display="inline"
-        whiteSpace="nowrap"
+        flex="0 0 auto"
       >
         {item.label}
       </Text>

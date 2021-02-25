@@ -7,7 +7,7 @@ function Header() {
   const { user } = useContext(UserContext);
 
   return (
-    <Flex align="center" justifyContent="space-between">
+    <Flex align="center" justifyContent="space-between" p="2">
       <Heading>
         {sayDay()}!{" "}
         <NextLink href="/profile">

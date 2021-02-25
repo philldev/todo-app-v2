@@ -80,7 +80,10 @@ export default function MobileNavbar() {
                 {item.href === router.pathname && (
                   <MotionBox
                     pos="absolute"
-                    inset="0"
+                    left="0"
+                    top="0"
+                    w="full"
+                    h="full"
                     bg="brand.600"
                     layoutId="bgColor"
                     initial={false}

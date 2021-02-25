@@ -7,7 +7,6 @@ import { CompleteIcon } from "../Icons";
 const MotionBox = motion.custom(
   forwardRef((props, ref) => {
     const chakraProps = Object.fromEntries(
-      // do not pass framer props to DOM element
       Object.entries(props).filter(([key]) => !isValidMotionProp(key))
     );
     return <Box ref={ref} {...chakraProps} />;
@@ -20,8 +19,9 @@ function TodoInfo() {
   if (!list.length) {
     return null;
   }
+
   return (
-    <Grid gridGap="2" padding="3" borderRadius="sm" shadow="base">
+    <Grid gridGap="2" padding="3" mb="4" shadow="base">
       <Text fontSize="md" fontWeight="bold">
         Progress
       </Text>

@@ -30,7 +30,6 @@ export default function AppLayout({ children }) {
           1fr minmax(auto, 1024px) 1fr
           `}
         shadow="2xl"
-        gap="4"
         rowGap="8"
         h="100vh"
       >
