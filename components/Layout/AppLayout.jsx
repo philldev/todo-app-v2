@@ -1,16 +1,7 @@
-import { Box, forwardRef, Grid, useColorModeValue } from "@chakra-ui/react";
-import { isValidMotionProp, motion } from "framer-motion";
+import { Grid, useColorModeValue } from "@chakra-ui/react";
 import { useContext } from "react";
 import NavContext from "../../context/NavContext";
-
-const MotionBox = motion.custom(
-  forwardRef((props, ref) => {
-    const chakraProps = Object.fromEntries(
-      Object.entries(props).filter(([key]) => !isValidMotionProp(key))
-    );
-    return <Box ref={ref} {...chakraProps} />;
-  })
-);
+import MotionBox from "../motion/MotionBox";
 
 export default function AppLayout({ children }) {
   const { isActive, close } = useContext(NavContext);
