@@ -8,7 +8,7 @@ export default function profile() {
       <Head>
         <title>Profile</title>
       </Head>
-      <VStack alignItems="stretch" spacing="4" gridArea="main">
+      <VStack alignItems="stretch" spacing="4" gridArea="main" p="2">
         <Heading>Profile</Heading>
 
         <EditProfileForm />
