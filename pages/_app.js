@@ -37,6 +37,7 @@ function MyApp({ Component, pageProps }) {
           name="viewport"
           content="initial-scale=1, viewport-fit=cover, user-scalable=no"
         />
+        <meta name="description" content="A simple todo list web app" />
         <link
           rel="apple-touch-icon"
           sizes="180x180"

@@ -27,6 +27,7 @@ const Navbar = () => {
       >
         <Nav />
         <IconButton
+          aria-label="Toggle Dark mode"
           onClick={toggleColorMode}
           bg="gray.700"
           _hover={{
@@ -35,6 +36,7 @@ const Navbar = () => {
           icon={colorMode === "light" ? <LightIcon /> : <DarkIcon />}
         />
         <IconButton
+          aria-label="Toggle navbar"
           bg="inherit"
           _hover={{ bg: "gray.600" }}
           onClick={(e) => {

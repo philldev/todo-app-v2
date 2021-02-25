@@ -22,8 +22,8 @@ const TodoList = () => {
 
   return (
     <Box maxH="100%" overflow="hidden">
-      {list.length && (
-        <Box mb="4" p="2">
+      {list.length !== 0 && (
+        <Box pb="6" p="2">
           <Heading mb="2" fontSize="lg">
             Filters
           </Heading>
@@ -108,12 +108,20 @@ function TodoItem({ item }) {
       alignItems="center"
       gridTemplateColumns="max-content auto max-content"
     >
+      <label htmlFor="check-todo" style={{ display: "none" }}>
+        Toggle Todo
+      </label>
       <Checkbox
+        id="check-todo"
         type="checkbox"
         defaultChecked={item.isDone}
         onChange={handleCheck}
       />
+      <label style={{ display: "none" }} htmlFor="edit-todo">
+        Edit Todo
+      </label>
       <Input
+        id="edit-todo"
         textDecor={`${item.isDone ? "line-through" : "normal"}`}
         opacity={`${item.isDone ? "0.5" : "1"}`}
         type="text"
@@ -124,7 +132,7 @@ function TodoItem({ item }) {
 
       <IconButton
         bgColor="transparent"
-        aria-label="Search database"
+        aria-label="Search"
         size="xs"
         icon={<DeleteIcon color="red.400" opacity="0.75" />}
         onClick={handleDelete}
