@@ -38,7 +38,7 @@ const TodoList = () => {
               justifyContent="flex-start"
             >
               {filters.map((item, idx) => (
-                <Box key={idx} as="li">
+                <Box key={idx} as="li" listStyleType="none">
                   <FilterItem
                     item={item}
                     filter={filter}
@@ -48,7 +48,7 @@ const TodoList = () => {
               ))}
 
               {completeCount ? (
-                <Box as="li">
+                <Box as="li" listStyleType="none">
                   <Button
                     flex="0 0 auto"
                     variant="outline"
