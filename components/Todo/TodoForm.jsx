@@ -6,9 +6,6 @@ const TodoForm = () => {
   const { text, setText, addTodo } = useTodoForm();
   return (
     <Flex gridGap={4} p="2">
-      <label htmlFor="add-todo" hidden="true">
-        Todo Text
-      </label>
       <Input
         id="add-todo"
         onKeyPress={(evt) => {
