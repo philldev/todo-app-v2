@@ -2,7 +2,8 @@ import { Grid } from "@chakra-ui/react";
 function AppLayout({ children }) {
   return (
     <Grid
-      gridTemplateRows="auto auto minmax(min-content, 1fr) auto"
+      pos="relative"
+      gridTemplateRows="auto minmax(min-content, 1fr) auto"
       gap="4"
       alignItems="stretch"
       h="100%"

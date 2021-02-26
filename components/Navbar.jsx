@@ -11,7 +11,13 @@ import { useRouter } from "next/router";
 import { useContext } from "react";
 import NavContext from "../context/NavContext";
 import UserContext from "../context/UserContext";
-import { DarkIcon, DeleteIcon, HamburgerIcon, LightIcon } from "./Icons";
+import {
+  AddIcon,
+  DarkIcon,
+  DeleteIcon,
+  HamburgerIcon,
+  LightIcon,
+} from "./Icons";
 
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();

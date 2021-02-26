@@ -1,10 +1,12 @@
+import { Box } from "@chakra-ui/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 // components
 import HomeLayout from "../components/Layout/HomeLayout";
-import TodoHeader from "../components/Todo/TodoHeader";
+import AddTodoBtn from "../components/Todo/AddTodoBtn";
 import TodoForm from "../components/Todo/TodoForm";
+import TodoHeader from "../components/Todo/TodoHeader";
 import TodoInfo from "../components/Todo/TodoInfo";
 import TodoList from "../components/Todo/TodoList";
 // context
@@ -32,9 +34,18 @@ function Home() {
         {user.isLoggedIn && (
           <HomeLayout>
             <TodoHeader />
-            <TodoForm />
             <TodoList />
             <TodoInfo />
+            <Box
+              pos="absolute"
+              p="4"
+              pb="14"
+              zIndex="popover"
+              bottom="0"
+              right="0"
+            >
+              <AddTodoBtn />
+            </Box>
           </HomeLayout>
         )}
       </TodoProvider>

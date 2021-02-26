@@ -21,7 +21,7 @@ export default function AppLayout({ children }) {
           1fr minmax(auto, 1024px) 1fr
           `}
         shadow="2xl"
-        rowGap="8"
+        rowGap="2"
         h="100vh"
       >
         {children}

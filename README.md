@@ -10,3 +10,6 @@ Todo :
 - (x) Add Logout implementations
 - (x) refactor code
 - (x) add PWA
+
+- () add category
+- () add sub todo
