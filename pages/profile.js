@@ -1,5 +1,6 @@
 import { Heading, VStack } from "@chakra-ui/react";
 import Head from "next/head";
+import ProfileLayout from "../components/Layout/ProfileLayout";
 import EditProfileForm from "../components/User/EditProfileForm";
 
 export default function profile() {
@@ -8,11 +9,10 @@ export default function profile() {
       <Head>
         <title>Profile</title>
       </Head>
-      <VStack alignItems="stretch" spacing="4" gridArea="main" p="2">
+      <ProfileLayout>
         <Heading>Profile</Heading>
-
         <EditProfileForm />
-      </VStack>
+      </ProfileLayout>
     </>
   );
 }

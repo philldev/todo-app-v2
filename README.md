@@ -8,15 +8,5 @@ Todo :
 - (x) Add user logic
 - (x) Add sidebar
 - (x) Add Logout implementations
-
 - (x) refactor code
-
-- () add PWA
-
-bugs :
-
-- (x) mobile navbar first render appear on the screen
-
-fixes :
-
-- (x) desktop nav
+- (x) add PWA
