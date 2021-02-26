@@ -11,5 +11,7 @@ Todo :
 - (x) refactor code
 - (x) add PWA
 
-- () add category
+- () add labels
+- () add created at
 - () add sub todo
+- () add install btn
