@@ -1,11 +1,12 @@
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import Head from "next/head";
-import AppLayout from "../components/Layout/AppLayout";
-import MobileNavbar from "../components/MobileNavbar";
-import Navbar from "../components/Navbar";
-import { NavProvider } from "../context/NavContext";
-import { UserProvider } from "../context/UserContext";
-import "../styles/global.css";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react"
+import Head from "next/head"
+import InstallButton from "../components/InstallButton"
+import AppLayout from "../components/Layout/AppLayout"
+import MobileNavbar from "../components/MobileNavbar"
+import Navbar from "../components/Navbar"
+import { NavProvider } from "../context/NavContext"
+import { UserProvider } from "../context/UserContext"
+import "../styles/global.css"
 
 export const theme = extendTheme({
   styles: {
@@ -27,7 +28,7 @@ export const theme = extendTheme({
   },
   initialColorMode: "dark",
   useSystemColorMode: false,
-});
+})
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -74,11 +75,12 @@ function MyApp({ Component, pageProps }) {
               <Navbar />
               <Component {...pageProps} />
             </AppLayout>
+            <InstallButton />
           </NavProvider>
         </UserProvider>
       </ChakraProvider>
     </>
-  );
+  )
 }
 
-export default MyApp;
+export default MyApp
