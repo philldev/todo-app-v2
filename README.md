@@ -14,4 +14,4 @@ Todo :
 - () add labels
 - () add created at
 - () add sub todo
-- () add install btn
+- (x) add install btn

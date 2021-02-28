@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Grid,
-  Heading,
-  IconButton,
-  Text,
-} from "@chakra-ui/react"
+import { Box, Button, Grid, Heading, IconButton, Text } from "@chakra-ui/react"
 import { useEffect, useRef, useState } from "react"
 import { DeleteIcon } from "./Icons"
 
