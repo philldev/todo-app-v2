@@ -1,29 +1,28 @@
-import { Box } from "@chakra-ui/react";
-import Head from "next/head";
-import { useRouter } from "next/router";
-import { useContext } from "react";
+import { Box } from "@chakra-ui/react"
+import Head from "next/head"
+import { useRouter } from "next/router"
+import { useContext } from "react"
 // components
-import HomeLayout from "../components/Layout/HomeLayout";
-import AddTodoBtn from "../components/Todo/AddTodoBtn";
-import TodoForm from "../components/Todo/TodoForm";
-import TodoHeader from "../components/Todo/TodoHeader";
-import TodoInfo from "../components/Todo/TodoInfo";
-import TodoList from "../components/Todo/TodoList";
+import HomeLayout from "../components/Layout/HomeLayout"
+import AddTodoBtn from "../components/Todo/AddTodoBtn"
+import TodoHeader from "../components/Todo/TodoHeader"
+import TodoInfo from "../components/Todo/TodoInfo"
+import TodoList from "../components/Todo/TodoList"
 // context
-import { TodoProvider } from "../context/TodoContext";
-import UserContext from "../context/UserContext";
+import { TodoProvider } from "../context/TodoContext"
+import UserContext from "../context/UserContext"
 // Hooks
-import useDidMountEffect from "../hooks/useDidMountEffect";
+import useDidMountEffect from "../hooks/useDidMountEffect"
 
 function Home() {
-  const { user } = useContext(UserContext);
-  const router = useRouter();
+  const { user } = useContext(UserContext)
+  const router = useRouter()
 
   useDidMountEffect(() => {
     if (!user.isLoggedIn) {
-      router.push("/signup");
+      router.push("/signup")
     }
-  }, [user]);
+  }, [user])
 
   return (
     <>
@@ -50,7 +49,7 @@ function Home() {
         )}
       </TodoProvider>
     </>
-  );
+  )
 }
 
-export default Home;
+export default Home

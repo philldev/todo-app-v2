@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
-const withPWA = require("next-pwa");
-const runtimeCaching = require("next-pwa/cache");
+const withPWA = require("next-pwa")
+const runtimeCaching = require("next-pwa/cache")
 
 // eslint-disable-next-line no-undef
 module.exports = withPWA({
@@ -8,5 +8,4 @@ module.exports = withPWA({
     dest: "public",
     runtimeCaching,
   },
-});
-  
+})

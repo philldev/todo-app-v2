@@ -5,23 +5,17 @@ import {
   IconButton,
   Link,
   useColorMode,
-} from "@chakra-ui/react";
-import NextLink from "next/link";
-import { useRouter } from "next/router";
-import { useContext } from "react";
-import NavContext from "../context/NavContext";
-import UserContext from "../context/UserContext";
-import {
-  AddIcon,
-  DarkIcon,
-  DeleteIcon,
-  HamburgerIcon,
-  LightIcon,
-} from "./Icons";
+} from "@chakra-ui/react"
+import NextLink from "next/link"
+import { useRouter } from "next/router"
+import { useContext } from "react"
+import NavContext from "../context/NavContext"
+import UserContext from "../context/UserContext"
+import { DarkIcon, DeleteIcon, HamburgerIcon, LightIcon } from "./Icons"
 
 const Navbar = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
-  const { toggle, isActive, close } = useContext(NavContext);
+  const { colorMode, toggleColorMode } = useColorMode()
+  const { toggle, isActive, close } = useContext(NavContext)
   return (
     <Flex bg="gray.700" color="gray.100" gridArea="header" p="2">
       <Container
@@ -46,31 +40,31 @@ const Navbar = () => {
           bg="inherit"
           _hover={{ bg: "gray.600" }}
           onClick={(e) => {
-            e.stopPropagation();
-            toggle();
+            e.stopPropagation()
+            toggle()
           }}
           onKeyDown={(e) => {
-            if (e.key === "Escape") close();
+            if (e.key === "Escape") close()
           }}
           icon={!isActive ? <HamburgerIcon /> : <DeleteIcon />}
           display={{ md: "none" }}
         />
       </Container>
     </Flex>
-  );
-};
+  )
+}
 
 export const Nav = () => {
-  const { user } = useContext(UserContext);
-  const router = useRouter();
-  if (!user.isLoggedIn) return null;
+  const { user } = useContext(UserContext)
+  const router = useRouter()
+  if (!user.isLoggedIn) return null
   return (
     <Box display={{ base: "none", md: "block" }}>
       {[
         { label: "Todos", href: "/" },
         { label: "Profile", href: "/profile" },
       ].map((item, idx) => {
-        const isLinkActive = item.href === router.pathname;
+        const isLinkActive = item.href === router.pathname
         return (
           <NextLink key={idx} href={item.href}>
             <Link
@@ -88,10 +82,10 @@ export const Nav = () => {
               {item.label}
             </Link>
           </NextLink>
-        );
+        )
       })}
     </Box>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
