@@ -61,15 +61,8 @@ const MobileNavbarLink = ({ href, label, isButtonLink, onClick }) => {
   const router = useRouter()
   if (isButtonLink)
     return (
-      <Link
-        onClick={onClick}
-        pos="relative"
-        p="2"
-        _hover={{
-          color: "gray.100",
-        }}
-      >
-        <Text pos="relative">Label</Text>
+      <Link onClick={onClick} pos="relative" p="2">
+        <Text pos="relative">{label}</Text>
       </Link>
     )
   return (

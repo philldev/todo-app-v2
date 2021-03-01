@@ -1,7 +1,7 @@
-import { Heading, VStack } from "@chakra-ui/react";
-import Head from "next/head";
-import ProfileLayout from "../components/Layout/ProfileLayout";
-import EditProfileForm from "../components/User/EditProfileForm";
+import { Heading } from "@chakra-ui/react"
+import Head from "next/head"
+import ProfileLayout from "../components/Layout/ProfileLayout"
+import EditProfileForm from "../components/User/EditProfileForm"
 
 export default function profile() {
   return (
@@ -14,5 +14,5 @@ export default function profile() {
         <EditProfileForm />
       </ProfileLayout>
     </>
-  );
+  )
 }
