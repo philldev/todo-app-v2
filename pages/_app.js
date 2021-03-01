@@ -74,8 +74,8 @@ function MyApp({ Component, pageProps }) {
             <AppLayout>
               <Navbar />
               <Component {...pageProps} />
+              <InstallButton />
             </AppLayout>
-            <InstallButton />
           </NavProvider>
         </UserProvider>
       </ChakraProvider>
