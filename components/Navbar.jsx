@@ -8,14 +8,12 @@ import {
 } from "@chakra-ui/react"
 import NextLink from "next/link"
 import { useRouter } from "next/router"
-import { useContext } from "react"
-import NavContext from "../context/NavContext"
-import UserContext from "../context/UserContext"
+import useNavbar from "./hooks/useNavbar"
 import { DarkIcon, DeleteIcon, HamburgerIcon, LightIcon } from "./Icons"
 
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode()
-  const { toggle, isActive, close } = useContext(NavContext)
+  const { toggle, isActive } = useNavbar()
   return (
     <Flex bg="gray.700" color="gray.100" gridArea="header" p="2">
       <Container
@@ -54,36 +52,66 @@ const Navbar = () => {
   )
 }
 
-export const Nav = () => {
-  const { user } = useContext(UserContext)
+const NavLink = ({ label, href, isButton, onClick }) => {
   const router = useRouter()
-  if (!user.isLoggedIn) return null
+  const isLinkActive = href === router.pathname
+  if (isButton)
+    return (
+      <Link
+        display="inline-block"
+        h="full"
+        fontWeight="bold"
+        px="4"
+        borderBottom="2px solid transparent"
+        _hover={{
+          textDecor: "none",
+        }}
+        onClick={onClick}
+      >
+        {label}
+      </Link>
+    )
+  return (
+    <NextLink href={href}>
+      <Link
+        display="inline-block"
+        h="full"
+        fontWeight="bold"
+        px="4"
+        borderBottom="2px solid transparent"
+        borderBottomColor={`${isLinkActive ? "brand.600" : ""}`}
+        _hover={{
+          textDecor: "none",
+          borderBottomColor: `${!isLinkActive ? "gray.600" : ""}`,
+        }}
+      >
+        {label}
+      </Link>
+    </NextLink>
+  )
+}
+
+const Nav = () => {
+  const { isLoggedIn, logout, router } = useNavbar()
   return (
     <Box display={{ base: "none", md: "block" }}>
-      {[
-        { label: "Todos", href: "/" },
-        { label: "Profile", href: "/profile" },
-      ].map((item, idx) => {
-        const isLinkActive = item.href === router.pathname
-        return (
-          <NextLink key={idx} href={item.href}>
-            <Link
-              display="inline-block"
-              h="full"
-              fontWeight="bold"
-              px="4"
-              borderBottom="2px solid transparent"
-              borderBottomColor={`${isLinkActive ? "brand.600" : ""}`}
-              _hover={{
-                textDecor: "none",
-                borderBottomColor: `${!isLinkActive ? "gray.600" : ""}`,
-              }}
-            >
-              {item.label}
-            </Link>
-          </NextLink>
-        )
-      })}
+      {isLoggedIn &&
+        [
+          { label: "Todos", href: "/" },
+          { label: "Profile", href: "/profile" },
+        ].map((item) => (
+          <NavLink href={item.href} label={item.label} key={item.href} />
+        ))}
+      {isLoggedIn && (
+        <NavLink
+          isButton
+          onClick={() => {
+            logout()
+            router.push("/signup")
+          }}
+          label="Logout"
+        />
+      )}
     </Box>
   )
 }
