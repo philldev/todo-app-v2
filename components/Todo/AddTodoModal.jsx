@@ -5,22 +5,21 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
-} from "@chakra-ui/react";
-import TodoForm from "./TodoForm";
+} from "@chakra-ui/react"
 
-const AddTodoModal = ({ isOpen, onClose, initialRef }) => {
+const AddTodoModal = ({ isOpen, onClose, initialRef, label, render }) => {
   return (
     <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent shadow="2xl" mx="2">
         <ModalCloseButton />
-        <ModalHeader>Add new task</ModalHeader>
+        <ModalHeader>{label}</ModalHeader>
         <ModalBody py="0" pb="4">
-          <TodoForm initialRef={initialRef} onClose={onClose} px="0" />
+          {render}
         </ModalBody>
       </ModalContent>
     </Modal>
-  );
-};
+  )
+}
 
-export default AddTodoModal;
+export default AddTodoModal

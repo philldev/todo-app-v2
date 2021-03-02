@@ -1,4 +1,4 @@
-import { Icon } from "@chakra-ui/react";
+import { Icon } from "@chakra-ui/react"
 
 export function AddIcon(props) {
   return (
@@ -14,7 +14,7 @@ export function AddIcon(props) {
         clipRule="evenodd"
       />
     </Icon>
-  );
+  )
 }
 
 export function DeleteIcon(props) {
@@ -31,7 +31,7 @@ export function DeleteIcon(props) {
         clipRule="evenodd"
       />
     </Icon>
-  );
+  )
 }
 export function LightIcon(props) {
   return (
@@ -47,7 +47,7 @@ export function LightIcon(props) {
         clipRule="evenodd"
       />
     </Icon>
-  );
+  )
 }
 export function DarkIcon(props) {
   return (
@@ -59,7 +59,7 @@ export function DarkIcon(props) {
     >
       <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
     </Icon>
-  );
+  )
 }
 
 export function CompleteIcon(props) {
@@ -76,8 +76,9 @@ export function CompleteIcon(props) {
         clipRule="evenodd"
       />
     </Icon>
-  );
+  )
 }
+
 export function HamburgerIcon(props) {
   return (
     <Icon
@@ -92,5 +93,22 @@ export function HamburgerIcon(props) {
         clipRule="evenodd"
       />
     </Icon>
-  );
+  )
+}
+
+export function CheckIcon(props) {
+  return (
+    <Icon
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+        clipRule="evenodd"
+      />
+    </Icon>
+  )
 }

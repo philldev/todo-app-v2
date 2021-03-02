@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Checkbox,
   Flex,
   Grid,
   Heading,
@@ -9,16 +8,18 @@ import {
   Input,
   Text,
   VStack,
-} from "@chakra-ui/react";
-import { useContext } from "react";
-import { TodoContext } from "../../context/TodoContext";
-import useFilter from "../../hooks/useFilter";
-import { DeleteIcon } from "../Icons";
-import useTodoItem from "./hooks/useTodoItem";
+} from "@chakra-ui/react"
+import { useContext } from "react"
+import { TodoContext } from "../../context/TodoContext"
+import useFilter from "../../hooks/useFilter"
+import { CheckIcon, DeleteIcon } from "../Icons"
+import AddSubTodoBtn from "./AddSubTodoBtn"
+import useSubTodoItem from "./hooks/useSubTodoItem"
+import useTodoItem from "./hooks/useTodoItem"
 
 const TodoList = () => {
-  const { completeCount, list, deleteAllCompleted } = useContext(TodoContext);
-  const { filteredList, selectFilter, filters, filter } = useFilter();
+  const { completeCount, list, deleteAllCompleted } = useContext(TodoContext)
+  const { filteredList, selectFilter, filters, filter } = useFilter()
 
   return (
     <Box maxH="100%" overflow="hidden">
@@ -80,8 +81,8 @@ const TodoList = () => {
         </Box>
       </Box>
     </Box>
-  );
-};
+  )
+}
 
 const FilterItem = ({ item, selectFilter, filter }) => (
   <Button
@@ -101,28 +102,78 @@ const FilterItem = ({ item, selectFilter, filter }) => (
       {item.label}
     </Text>
   </Button>
-);
+)
+
+const CustomCheckBox = ({ isDone, onClick }) => {
+  const checkStyle = {
+    bg: !isDone ? "gray.200" : "blue.400",
+    opacity: !isDone ? "0" : "1",
+  }
+  return (
+    <IconButton
+      bg={checkStyle.bg}
+      rounded="full"
+      aria-label="Check todo"
+      size="xs"
+      _focus={{ bg: checkStyle.bg }}
+      _active={{ bg: checkStyle.bg }}
+      _hover={{ bg: checkStyle.bg }}
+      icon={<CheckIcon color="gray.100" opacity={checkStyle.opacity} />}
+      onClick={onClick}
+    />
+  )
+}
 
 function TodoItem({ item }) {
-  const { handleCheck, handleChange, handleDelete } = useTodoItem(item);
+  const { handleCheck, handleChange, handleDelete } = useTodoItem(item)
+  return (
+    <Box>
+      <Grid
+        gap="2"
+        alignItems="center"
+        gridTemplateColumns="max-content auto max-content"
+      >
+        <CustomCheckBox onClick={handleCheck} isDone={item.isDone} />
+        <Input
+          id={`edit-todo-${item.id}`}
+          textDecor={`${item.isDone ? "line-through" : "normal"}`}
+          opacity={`${item.isDone ? "0.5" : "1"}`}
+          type="text"
+          value={item.text}
+          onChange={handleChange}
+          size="md"
+        />
+        <Flex>
+          <AddSubTodoBtn parentText={item.text} item={item} />
+          <IconButton
+            bgColor="transparent"
+            aria-label="Delete Todo"
+            size="xs"
+            icon={<DeleteIcon color="red.400" opacity="0.75" />}
+            onClick={handleDelete}
+          />
+        </Flex>
+      </Grid>
+      <Grid mt="2" gap="2">
+        {item.subTodo.map((i) => (
+          <SubTodo key={i.id} item={i} />
+        ))}
+      </Grid>
+    </Box>
+  )
+}
+
+const SubTodo = ({ item }) => {
+  const { handleChange, handleCheck, handleDelete } = useSubTodoItem(item)
   return (
     <Grid
+      pl="6"
+      pr="8"
       gap="2"
       alignItems="center"
       gridTemplateColumns="max-content auto max-content"
     >
-      <label htmlFor={`check-todo-${item.id}`} style={{ display: "none" }}>
-        Toggle Todo
-      </label>
-      <Checkbox
-        id={`check-todo-$${item.id}`}
-        type="checkbox"
-        defaultChecked={item.isDone}
-        onChange={handleCheck}
-      />
-      <label style={{ display: "none" }} htmlFor={`edit-todo-${item.id}`}>
-        Edit Todo
-      </label>
+      <CustomCheckBox isDone={item.isDone} onClick={handleCheck} />
       <Input
         id={`edit-todo-${item.id}`}
         textDecor={`${item.isDone ? "line-through" : "normal"}`}
@@ -130,18 +181,19 @@ function TodoItem({ item }) {
         type="text"
         value={item.text}
         onChange={handleChange}
-        size="md"
-      />
-
-      <IconButton
-        bgColor="transparent"
-        aria-label="Search"
         size="xs"
-        icon={<DeleteIcon color="red.400" opacity="0.75" />}
-        onClick={handleDelete}
       />
+      <Flex>
+        <IconButton
+          bgColor="transparent"
+          aria-label="Delete Todo"
+          size="xs"
+          icon={<DeleteIcon color="red.400" opacity="0.75" />}
+          onClick={handleDelete}
+        />
+      </Flex>
     </Grid>
-  );
+  )
 }
 
-export default TodoList;
+export default TodoList
