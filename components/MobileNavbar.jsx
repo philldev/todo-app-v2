@@ -59,6 +59,7 @@ const MobileNavbar = () => {
 
 const MobileNavbarLink = ({ href, label, isButtonLink, onClick }) => {
   const router = useRouter()
+  const isLinkActive = href === router.pathname
   if (isButtonLink)
     return (
       <Link onClick={onClick} pos="relative" p="2">
@@ -69,15 +70,15 @@ const MobileNavbarLink = ({ href, label, isButtonLink, onClick }) => {
     <NextLink href={href}>
       <Link
         pos="relative"
-        bg={`${href === router.pathname ? "brand.600" : ""}`}
+        bg={`${isLinkActive ? "brand.600" : ""}`}
         p="2"
         _hover={{
-          bg: `${href === router.pathname ? "" : "gray.600"}`,
+          bg: `${isLinkActive ? "" : "gray.600"}`,
           color: "gray.100",
         }}
-        color={`${href === router.pathname ? "gray.100" : "inherit"}`}
+        color={`${isLinkActive ? "gray.100" : "inherit"}`}
       >
-        {href === router.pathname && (
+        {isLinkActive && (
           <MotionBox
             pos="absolute"
             left="0"
