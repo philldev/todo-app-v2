@@ -28,7 +28,18 @@ export function TodoProvider({ children }) {
 
   const checkTodo = (item) => {
     setList((prev) =>
-      prev.map((i) => (i.id === item.id ? { ...i, isDone: !i.isDone } : i))
+      prev.map((i) =>
+        i.id === item.id
+          ? {
+              ...i,
+              isDone: !i.isDone,
+              subTodo: i.subTodo.map((s) => ({
+                ...s,
+                isDone: i.isDone ? false : true,
+              })),
+            }
+          : i
+      )
     )
   }
 
@@ -41,8 +52,8 @@ export function TodoProvider({ children }) {
   }
 
   const addSubTodo = (todoId, text) => {
+    console.log(todoId, text)
     if (text) {
-      console.log(todoId)
       setList((prev) =>
         prev.map((item) =>
           item.id === todoId
@@ -53,7 +64,7 @@ export function TodoProvider({ children }) {
                   {
                     id: shortid(),
                     text,
-                    isDone: false,
+                    isDone: item.isDone,
                     createdAt: new Date().toISOString(),
                     parentId: item.id,
                   },

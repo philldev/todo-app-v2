@@ -140,17 +140,18 @@ function TodoItem({ item }) {
           />
         </Flex>
       </Grid>
-      <Box mt="2">
+      <Grid mt="2" gap="2">
         {item.subTodo.map((i) => (
           <SubTodo key={i.id} item={i} />
         ))}
-      </Box>
+      </Grid>
     </Box>
   )
 }
 
 const SubTodo = ({ item }) => {
   const { handleChange, handleCheck, handleDelete } = useSubTodoItem(item)
+  console.log(item.isDone)
   return (
     <Grid
       pl="6"
@@ -162,8 +163,9 @@ const SubTodo = ({ item }) => {
       <Checkbox
         id={`check-todo-$${item.id}`}
         type="checkbox"
-        defaultChecked={item.isDone}
         onChange={handleCheck}
+        checked={item.isDone}
+        defaultChecked={item.isDone}
       />
       <Input
         id={`edit-todo-${item.id}`}

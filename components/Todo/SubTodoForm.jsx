@@ -23,7 +23,7 @@ const SubTodoForm = (props) => {
       />
       <IconButton
         onClick={() => {
-          addSubTodo(text)
+          addSubTodo(props.item.id, text)
           setText("")
           props.onClose()
         }}
