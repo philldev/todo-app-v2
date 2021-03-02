@@ -52,7 +52,6 @@ export function TodoProvider({ children }) {
   }
 
   const addSubTodo = (todoId, text) => {
-    console.log(todoId, text)
     if (text) {
       setList((prev) =>
         prev.map((item) =>
@@ -120,8 +119,6 @@ export function TodoProvider({ children }) {
   }
 
   const completeCount = list.filter((i) => i.isDone).length
-
-  console.log(list)
 
   return (
     <TodoContext.Provider

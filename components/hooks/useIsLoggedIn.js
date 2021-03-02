@@ -6,7 +6,6 @@ export default function useIsLoggedIn() {
   const { user, logout } = useContext(UserContext)
   useEffect(() => {
     setIsLoggedIn(user.isLoggedIn)
-    console.log(isLoggedIn, user.isLoggedIn)
   }, [user.isLoggedIn])
   return {
     isLoggedIn,
