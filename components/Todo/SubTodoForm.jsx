@@ -10,7 +10,6 @@ const SubTodoForm = (props) => {
         id="add-todo"
         onKeyPress={(evt) => {
           if (evt.key === "Enter") {
-            console.log(text)
             addSubTodo(props.item.id, text)
             setText("")
             props.onClose()
