@@ -12,6 +12,5 @@ Todo :
 - (x) add PWA
 
 - () add labels
-- () add created at
 - () add sub todo
 - (x) add install btn
