@@ -13,7 +13,7 @@ import {
 import { useContext } from "react"
 import { TodoContext } from "../../context/TodoContext"
 import useFilter from "../../hooks/useFilter"
-import { DeleteIcon } from "../Icons"
+import { CheckIcon, DeleteIcon } from "../Icons"
 import AddSubTodoBtn from "./AddSubTodoBtn"
 import useSubTodoItem from "./hooks/useSubTodoItem"
 import useTodoItem from "./hooks/useTodoItem"
@@ -105,6 +105,26 @@ const FilterItem = ({ item, selectFilter, filter }) => (
   </Button>
 )
 
+const CustomCheckBox = ({ isDone, onClick }) => {
+  const checkStyle = {
+    bg: !isDone ? "gray.200" : "blue.400",
+    opacity: !isDone ? "0" : "1",
+  }
+  return (
+    <IconButton
+      bg={checkStyle.bg}
+      rounded="full"
+      aria-label="Check todo"
+      size="xs"
+      _focus={{ bg: checkStyle.bg }}
+      _active={{ bg: checkStyle.bg }}
+      _hover={{ bg: checkStyle.bg }}
+      icon={<CheckIcon color="gray.100" opacity={checkStyle.opacity} />}
+      onClick={onClick}
+    />
+  )
+}
+
 function TodoItem({ item }) {
   const { handleCheck, handleChange, handleDelete } = useTodoItem(item)
   return (
@@ -114,12 +134,7 @@ function TodoItem({ item }) {
         alignItems="center"
         gridTemplateColumns="max-content auto max-content"
       >
-        <Checkbox
-          id={`check-todo-$${item.id}`}
-          type="checkbox"
-          defaultChecked={item.isDone}
-          onChange={handleCheck}
-        />
+        <CustomCheckBox onClick={handleCheck} isDone={item.isDone} />
         <Input
           id={`edit-todo-${item.id}`}
           textDecor={`${item.isDone ? "line-through" : "normal"}`}
@@ -151,7 +166,6 @@ function TodoItem({ item }) {
 
 const SubTodo = ({ item }) => {
   const { handleChange, handleCheck, handleDelete } = useSubTodoItem(item)
-  console.log(item.isDone)
   return (
     <Grid
       pl="6"
@@ -160,13 +174,7 @@ const SubTodo = ({ item }) => {
       alignItems="center"
       gridTemplateColumns="max-content auto max-content"
     >
-      <Checkbox
-        id={`check-todo-$${item.id}`}
-        type="checkbox"
-        onChange={handleCheck}
-        checked={item.isDone}
-        defaultChecked={item.isDone}
-      />
+      <CustomCheckBox isDone={item.isDone} onClick={handleCheck} />
       <Input
         id={`edit-todo-${item.id}`}
         textDecor={`${item.isDone ? "line-through" : "normal"}`}

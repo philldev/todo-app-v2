@@ -17,16 +17,16 @@ export default function useTodoItem(item = {}) {
     })
   }
 
-  // useEffect(() => {
-  //   if (
-  //     item.subTodo.length &&
-  //     item.subTodo.every((s) => s.isDone === true) &&
-  //     !item.isDone
-  //   ) {
-  //     checkTodo(item)
-  //     console.log("hey")
-  //   }
-  // }, [item])
+  useEffect(() => {
+    if (
+      item.subTodo.length &&
+      item.subTodo.every((s) => s.isDone === true) &&
+      !item.isDone
+    ) {
+      checkTodo(item)
+    }
+  }, [item])
+
   return {
     handleCheck,
     handleChange,
