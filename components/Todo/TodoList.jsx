@@ -13,7 +13,9 @@ import {
 import { useContext } from "react"
 import { TodoContext } from "../../context/TodoContext"
 import useFilter from "../../hooks/useFilter"
-import { AddIcon, DeleteIcon } from "../Icons"
+import { DeleteIcon } from "../Icons"
+import AddSubTodoBtn from "./AddSubTodoBtn"
+import useSubTodoItem from "./hooks/useSubTodoItem"
 import useTodoItem from "./hooks/useTodoItem"
 
 const TodoList = () => {
@@ -128,14 +130,7 @@ function TodoItem({ item }) {
           size="md"
         />
         <Flex>
-          <IconButton
-            bgColor="brand.600"
-            aria-label="Add SubTodo"
-            size="xs"
-            icon={<AddIcon color="gray.50" opacity="0.75" />}
-            onClick={handleDelete}
-            mr="2"
-          />
+          <AddSubTodoBtn parentText={item.text} item={item} />
           <IconButton
             bgColor="transparent"
             aria-label="Delete Todo"
@@ -146,40 +141,49 @@ function TodoItem({ item }) {
         </Flex>
       </Grid>
       <Box mt="2">
-        <Grid
-          pl="6"
-          pr="8"
-          gap="2"
-          alignItems="center"
-          gridTemplateColumns="max-content auto max-content"
-        >
-          <Checkbox
-            id={`check-todo-$${item.id}`}
-            type="checkbox"
-            defaultChecked={item.isDone}
-            onChange={handleCheck}
-          />
-          <Input
-            id={`edit-todo-${item.id}`}
-            textDecor={`${item.isDone ? "line-through" : "normal"}`}
-            opacity={`${item.isDone ? "0.5" : "1"}`}
-            type="text"
-            value={item.text}
-            onChange={handleChange}
-            size="xs"
-          />
-          <Flex>
-            <IconButton
-              bgColor="transparent"
-              aria-label="Delete Todo"
-              size="xs"
-              icon={<DeleteIcon color="red.400" opacity="0.75" />}
-              onClick={handleDelete}
-            />
-          </Flex>
-        </Grid>
+        {item.subTodo.map((i) => (
+          <SubTodo key={i.id} item={i} />
+        ))}
       </Box>
     </Box>
+  )
+}
+
+const SubTodo = ({ item }) => {
+  const { handleChange, handleCheck, handleDelete } = useSubTodoItem(item)
+  return (
+    <Grid
+      pl="6"
+      pr="8"
+      gap="2"
+      alignItems="center"
+      gridTemplateColumns="max-content auto max-content"
+    >
+      <Checkbox
+        id={`check-todo-$${item.id}`}
+        type="checkbox"
+        defaultChecked={item.isDone}
+        onChange={handleCheck}
+      />
+      <Input
+        id={`edit-todo-${item.id}`}
+        textDecor={`${item.isDone ? "line-through" : "normal"}`}
+        opacity={`${item.isDone ? "0.5" : "1"}`}
+        type="text"
+        value={item.text}
+        onChange={handleChange}
+        size="xs"
+      />
+      <Flex>
+        <IconButton
+          bgColor="transparent"
+          aria-label="Delete Todo"
+          size="xs"
+          icon={<DeleteIcon color="red.400" opacity="0.75" />}
+          onClick={handleDelete}
+        />
+      </Flex>
+    </Grid>
   )
 }
 
