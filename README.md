@@ -13,5 +13,7 @@ Todo :
 
 - () add labels
 - (x) add sub todo
-  - () add custom checkbox
+  - (x) add custom checkbox
 - (x) add install btn
+
+- add auth
