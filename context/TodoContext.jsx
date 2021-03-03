@@ -5,7 +5,7 @@ import useLocalStorage from "../hooks/useLocalStorage"
 export const TodoContext = createContext()
 
 export function TodoProvider({ children }) {
-  const [list, setList] = useLocalStorage("todo-list", [])
+  const [list, setList] = useLocalStorage("todo-app-v2-list", [])
 
   const addTodo = (text) => {
     if (text) {
